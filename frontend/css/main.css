@@ -1,0 +1,95 @@
+:root {
+   /* Modern Color Palette */
+   --primary: #2563eb;
+   --primary-hover: #1d4ed8;
+   --bg-light: #f8fafc;
+   --surface: #ffffff;
+   --text-main: #0f172a;
+   --text-muted: #64748b;
+   --border: #e2e8f0;
+
+   /* Layout Variables */
+   --radius-md: 8px;
+   --radius-lg: 16px;
+   --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body {
+   background-color: var(--bg-light);
+   color: var(--text-main);
+   line-height: 1.6;
+   -webkit-font-smoothing: antialiased;
+}
+
+html {
+   scroll-behavior: smooth;
+}
+
+.container {
+   width: 100%;
+   max-width: 1200px;
+   margin: 0 auto;
+   padding: 0 24px;
+}
+
+/* Reusable Buttons */
+.btn {
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   padding: 0.625rem 1.25rem;
+   font-size: 0.875rem;
+   font-weight: 500;
+   border-radius: var(--radius-md);
+   text-decoration: none;
+   transition: all 0.2s ease;
+   cursor: pointer;
+   border: 1px solid transparent;
+}
+
+.btn-large {
+   padding: 0.875rem 1.75rem;
+   font-size: 1rem;
+}
+
+.btn-primary {
+   background-color: var(--primary);
+   color: white;
+   box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+   background-color: var(--primary-hover);
+   transform: translateY(-1px);
+}
+
+.btn-outline {
+   background-color: transparent;
+   border-color: var(--border);
+   color: var(--text-main);
+}
+
+.btn-outline:hover {
+   background-color: var(--surface);
+   border-color: var(--text-muted);
+}
+
+.btn-text {
+   color: var(--text-muted);
+}
+
+.btn-text:hover {
+   color: var(--text-main);
+}
+
+.btn-full {
+   width: 100%;
+}

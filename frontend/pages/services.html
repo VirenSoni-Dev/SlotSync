@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Services | SlotSync</title>
+   <link rel="stylesheet" href="../css/main.css">
+   <link rel="stylesheet" href="../css/booking.css">
+</head>
+
+<body>
+   <nav class="app-navbar">
+      <div class="container nav-container">
+         <a href="services.html" class="logo">SlotSync.</a>
+         <div class="nav-links">
+            <a href="services.html" class="active">Services</a>
+            <a href="my-bookings.html">My Bookings</a>
+            <a href="profile.html">Profile</a>
+            <button id="logoutBtn" class="btn btn-outline">Log out</button>
+         </div>
+      </div>
+   </nav>
+
+   <main class="container page-content">
+      <div class="page-header">
+         <div>
+            <h1>Our Services</h1>
+            <p>Select a service to schedule your appointment.</p>
+         </div>
+      </div>
+
+      <div class="services-grid" id="servicesGrid">
+         <p class="loading-text">Loading services...</p>
+      </div>
+   </main>
+
+   <script type="module" src="../js/services.js"></script>
+</body>
+
+</html>
