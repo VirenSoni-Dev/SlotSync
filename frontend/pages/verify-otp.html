@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Verify OTP — SlotSync</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      rel="stylesheet" />
+   <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+   <link rel="stylesheet" href="../css/main.css" />
+   <link rel="stylesheet" href="../css/auth.css" />
+</head>
+
+<body class="auth-page">
+
+   <!-- Minimal navbar -->
+   <nav class="auth-nav">
+      <a href="../index.html" class="nav-logo">
+         <img src="../assets/logo.svg" alt="SlotSync Logo" />
+         SlotSync
+      </a>
+   </nav>
+
+   <main class="auth-main auth-main-centered">
+
+      <div class="auth-card otp-card">
+
+         <!-- Icon -->
+         <div class="otp-icon-wrap">
+            <i class="hgi hgi-stroke hgi-mail-send-01"></i>
+         </div>
+
+         <div class="auth-card-header">
+            <h1>Check your email</h1>
+            <p>
+               We sent a 6-digit code to<br />
+               <strong id="otpEmail">your email address</strong>
+            </p>
+         </div>
+
+         <div class="auth-error" id="authError" style="display:none;"></div>
+         <div class="auth-success" id="authSuccess" style="display:none;"></div>
+
+         <!-- 6 OTP boxes -->
+         <div class="otp-inputs" id="otpInputs">
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+            <input type="text" class="otp-box" maxlength="1" inputmode="numeric" pattern="[0-9]" />
+         </div>
+
+         <button class="btn-primary btn-full" id="verifyBtn">
+            <span id="verifyBtnText">Verify Code</span>
+            <span id="verifyBtnLoader" class="btn-spinner" style="display:none;"></span>
+         </button>
+
+         <!-- Resend timer -->
+         <div class="otp-resend">
+            <span id="resendTimer">
+               Resend code in <strong id="countdown">30</strong>s
+            </span>
+            <button class="otp-resend-btn" id="resendBtn" style="display:none;">
+               <i class="hgi hgi-stroke hgi-refresh"></i>
+               Resend code
+            </button>
+         </div>
+
+         <a href="register.html" class="auth-back-link">
+            <i class="hgi hgi-stroke hgi-arrow-left-01"></i>
+            Back to register
+         </a>
+
+      </div>
+
+   </main>
+
+   <script type="module" src="../js/verify-otp.js"></script>
+</body>
+
+</html>

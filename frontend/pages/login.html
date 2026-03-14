@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Login — SlotSync</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      rel="stylesheet" />
+   <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+   <link rel="stylesheet" href="../css/main.css" />
+   <link rel="stylesheet" href="../css/auth.css" />
+</head>
+
+<body class="auth-page">
+
+   <!-- Minimal navbar -->
+   <nav class="auth-nav">
+      <a href="../index.html" class="nav-logo">
+         <img src="../assets/logo.svg" alt="SlotSync Logo" />
+         SlotSync
+      </a>
+      <span class="auth-nav-hint">
+         Don't have an account?
+         <a href="register.html">Sign up</a>
+      </span>
+   </nav>
+
+   <main class="auth-main">
+
+      <!-- Left panel — decorative -->
+      <div class="auth-panel">
+         <div class="panel-content">
+            <div class="panel-tag">Welcome back</div>
+            <h2>Your appointments<br />are waiting.</h2>
+            <p>Log back in to view your upcoming bookings, manage your schedule, and book new slots.</p>
+            <div class="panel-features">
+               <div class="panel-feature">
+                  <i class="hgi hgi-stroke hgi-calendar-check-in"></i>
+                  <span>View upcoming bookings</span>
+               </div>
+               <div class="panel-feature">
+                  <i class="hgi hgi-stroke hgi-notification-02"></i>
+                  <span>Get appointment reminders</span>
+               </div>
+               <div class="panel-feature">
+                  <i class="hgi hgi-stroke hgi-time-schedule"></i>
+                  <span>Reschedule with one click</span>
+               </div>
+            </div>
+         </div>
+         <div class="panel-bg">
+            <div class="panel-circle c1"></div>
+            <div class="panel-circle c2"></div>
+         </div>
+      </div>
+
+      <!-- Right panel — form -->
+      <div class="auth-form-wrap">
+         <div class="auth-card">
+            <div class="auth-card-header">
+               <h1>Welcome back</h1>
+               <p>Enter your credentials to continue</p>
+            </div>
+
+            <div class="auth-error" id="authError" style="display:none;"></div>
+            <div class="auth-success" id="authSuccess" style="display:none;"></div>
+
+            <div class="auth-fields">
+
+               <div class="field-group">
+                  <label for="email">Email Address</label>
+                  <div class="field-input-wrap">
+                     <i class="hgi hgi-stroke hgi-mail-01"></i>
+                     <input type="email" id="email" name="email" placeholder="rahul@example.com" autocomplete="email" />
+                  </div>
+                  <span class="field-error" id="emailError"></span>
+               </div>
+
+               <div class="field-group">
+                  <label for="password">
+                     Password
+                     <a href="forgot-password.html" class="field-label-link">Forgot password?</a>
+                  </label>
+                  <div class="field-input-wrap">
+                     <i class="hgi hgi-stroke hgi-lock-password"></i>
+                     <input type="password" id="password" name="password" placeholder="Your password"
+                        autocomplete="current-password" />
+                     <button type="button" class="field-toggle" id="togglePassword" aria-label="Toggle password">
+                        <i class="hgi hgi-stroke hgi-view-01" id="toggleIcon"></i>
+                     </button>
+                  </div>
+                  <span class="field-error" id="passwordError"></span>
+               </div>
+
+            </div>
+
+            <button class="btn-primary btn-full" id="loginBtn">
+               <span id="loginBtnText">Log In</span>
+               <span id="loginBtnLoader" class="btn-spinner" style="display:none;"></span>
+            </button>
+
+            <div class="auth-divider">
+               <span>or</span>
+            </div>
+
+            <p class="auth-switch">
+               New to SlotSync?
+               <a href="register.html">Create a free account</a>
+            </p>
+
+         </div>
+      </div>
+
+   </main>
+
+   <script type="module" src="../js/login.js"></script>
+</body>
+
+</html>
