@@ -9,8 +9,10 @@ dotenv.config();
 
 // ── Create reusable transporter ──
 // Created once, reused for every email sent
-   const transporter = nodemailer.createTransport({
-   service: 'gmail',
+const transporter = nodemailer.createTransport({
+   service: 'smtp.gmail.com',
+   port: 465,
+   secure: true,
    auth: {
       user: process.env.EMAIL_USER,
       pass: process.env.EMAIL_PASS
@@ -149,8 +151,36 @@ const sendWaitlistEmail = async (email, { name, serviceName, date, startTime }) 
    });
 };
 
+// ── Send welcome email ──
+// Triggered once after account is verified
+const sendWelcomeEmail = async (email, name) => {
+   await sendMail({
+      to: email,
+      subject: 'Welcome to SlotSync 🎉',
+      html: `
+            <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto; padding: 32px; background: #0a0a0f; color: #f0f0f8; border-radius: 12px;">
+                <h2 style="color: #6c63ff; margin-bottom: 8px;">SlotSync</h2>
+                <h3 style="margin-bottom: 16px;">Welcome aboard, ${name}! 👋</h3>
+                <p style="color: #a0a0b8; margin-bottom: 20px; line-height: 1.7;">
+                    Your account has been verified. You can now browse services
+                    and book appointments in seconds — no calls, no back-and-forth.
+                </p>
+                <a href="${process.env.FRONTEND_URL}/pages/services.html"
+                   style="display: inline-block; background: #6c63ff; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 600; text-decoration: none; margin-bottom: 24px;">
+                    Browse Services
+                </a>
+                <hr style="border-color: rgba(255,255,255,0.08); margin: 24px 0;" />
+                <p style="color: #606078; font-size: 0.78rem;">
+                    If you didn't create this account, please ignore this email.
+                </p>
+            </div>
+        `
+   });
+};
+
 export {
    sendOtpEmail,
+   sendWelcomeEmail,
    sendBookingConfirmation,
    sendReminderEmail,
    sendCancellationEmail,

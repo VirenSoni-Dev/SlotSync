@@ -84,6 +84,10 @@ const verifyOtp = async (req, res, next) => {
       // Mark user as verified (only for register flow)
       if (purpose === 'register') {
          await userModel.verifyUser(email);
+
+         // Send welcome email
+         const user = await userModel.findByEmail(email);
+         await mailService.sendWelcomeEmail(email, user.name);
       }
 
       return sendSuccess(res, 'OTP verified successfully.');
@@ -166,7 +170,7 @@ const login = async (req, res, next) => {
       res.cookie('refreshToken', refreshToken, {
          httpOnly: true,
          secure: process.env.NODE_ENV === 'production', // HTTPS only in prod
-         sameSite: 'strict',
+         sameSite: process.env.NODE_ENV === 'production' ? 'strict' : 'lax',
          maxAge: 7 * 24 * 60 * 60 * 1000 // 7 days in milliseconds
       });
 
