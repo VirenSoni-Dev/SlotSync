@@ -1,5 +1,5 @@
-import { verifyAccessToken } from "../utils/generateToken";
-import { sendError } from "../utils/apiResponse";
+import { verifyAccessToken } from "../utils/generateToken.js";
+import { sendError } from "../utils/apiResponse.js";
 
 const authMiddleware = async (req, res, next) => {
    try {
