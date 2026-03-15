@@ -3,6 +3,7 @@ import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
+import authRoutes from './routes/authRoutes.js';
 
 dotenv.config();
 
@@ -30,6 +31,8 @@ app.get('/api/health', (req, res) => {
       timestamp: new Date().toISOString()
    });
 });
+
+app.use('/api/auth', authRoutes);
 
 app.use((req, res) => {
    res.status(404).send(`

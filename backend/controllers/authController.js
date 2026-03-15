@@ -1,16 +1,4 @@
-// ============================================================
-//  controllers/authController.js
-//  Handles all auth logic — register, login, OTP, password reset
-//
-//  Each function:
-//  1. Reads from req.body (already validated by Joi middleware)
-//  2. Runs business logic
-//  3. Talks to models / services
-//  4. Sends response
-// ============================================================
-
 import bcrypt from 'bcryptjs';
-
 import * as userModel from '../models/userModel.js';
 import * as otpService from '../services/otpService.js';
 import * as mailService from '../services/mailService.js';
