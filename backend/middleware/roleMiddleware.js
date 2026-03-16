@@ -1,4 +1,4 @@
-import { sendError } from "../utils/apiResponse";
+import { sendError } from "../utils/apiResponse.js";
 
 const isAdmin = (req, res, next) => {
    if (req.user?.role !== 'admin') {

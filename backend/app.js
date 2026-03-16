@@ -2,27 +2,45 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser';
-import authRoutes from './routes/authRoutes.js';
 
 dotenv.config();
+
+import cookieParser from 'cookie-parser';
 
 import { rateLimiter } from './middleware/rateLimiter.js';
 import errorHandler from './middleware/errorHandler.js';
 
+import authRoutes from './routes/authRoutes.js';
+import serviceRoutes from './routes/serviceRoutes.js';
+
 const app = express();
 
-app.use(cors());
+// ============================================================
+// MIDDLEWARE STACK
+// Every request flows through these in order, top to bottom
+// ============================================================
+
+app.use(cors({
+    origin: process.env.FRONTEND_URL || 'http://127.0.0.1:5500',
+    credentials: true
+}));
 
 app.use(morgan('dev'));
 
 app.use(express.json());
 
-app.use(cookieParser());
-
 app.use(express.urlencoded({ extended: true }));
 
 app.use(rateLimiter);
+
+app.use(cookieParser());
+
+// ============================================================
+// ROUTES
+// ============================================================
+
+app.use('/api/auth', authRoutes);
+app.use('/api/services', serviceRoutes);
 
 app.get('/api/health', (req, res) => {
    res.json({
@@ -32,8 +50,7 @@ app.get('/api/health', (req, res) => {
    });
 });
 
-app.use('/api/auth', authRoutes);
-
+// 404 handler — catches any route that doesn't exist
 app.use((req, res) => {
    res.status(404).send(`
         <html>
@@ -56,6 +73,10 @@ app.use((req, res) => {
     `);
 });
 
+// ============================================================
+// GLOBAL ERROR HANDLER
+// Must be LAST — catches errors thrown anywhere in the app
+// ============================================================
 app.use(errorHandler);
 
 export default app;
