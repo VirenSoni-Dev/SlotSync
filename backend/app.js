@@ -13,6 +13,7 @@ import errorHandler from './middleware/errorHandler.js';
 import authRoutes from './routes/authRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
 import slotRoutes from './routes/slotRoutes.js';
+import bookingRoutes from './routes/bookingRoutes.js';
 
 const app = express();
 
@@ -43,6 +44,7 @@ app.use(cookieParser());
 app.use('/api/auth', authRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/slots', slotRoutes);
+app.use('/api/bookings', bookingRoutes);
 
 app.get('/api/health', (req, res) => {
    res.json({
