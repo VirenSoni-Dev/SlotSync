@@ -26,7 +26,7 @@ const minutesToTime = (minutes) => {
    return `${h}:${m}`;
 };
 
-const generateSlots = (date, start_time, end_time, duration_min, max_cap = 1) => {
+const generateSlots = ({date, start_time, end_time, duration_min, max_cap = 1}) => {
    const startMinutes = timeToMinutes(start_time);
    const endMinutes = timeToMinutes(end_time);
 
