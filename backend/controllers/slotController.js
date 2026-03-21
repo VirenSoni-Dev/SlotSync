@@ -1,6 +1,6 @@
 import * as slotModel from '../models/slotModel.js';
 import { generateSlots } from '../utils/slotGenerator.js';
-import { sendSuccess, sendError } from '../utils/responseHandler.js';
+import { sendSuccess, sendError } from '../utils/apiResponse.js';
 
 // ============================================================
 //  GET /api/slots?date=2025-02-10
