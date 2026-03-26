@@ -178,11 +178,33 @@ const sendWelcomeEmail = async (email, name) => {
    });
 };
 
+// ── Send day before reminder email ──
+const sendDayBeforeReminder = async (email, { name, serviceName, date, startTime }) => {
+   await sendMail({
+      to: email,
+      subject: 'Reminder: Your appointment is tomorrow — SlotSync',
+      html: `
+            <div style="font-family: sans-serif; max-width: 480px; margin: 0 auto; padding: 32px; background: #0a0a0f; color: #f0f0f8; border-radius: 12px;">
+                <h2 style="color: #6c63ff; margin-bottom: 8px;">SlotSync</h2>
+                <h3 style="margin-bottom: 16px;">📅 Appointment Tomorrow</h3>
+                <p style="color: #a0a0b8;">Hi ${name}, just a heads up — your appointment is <strong style="color:#f0f0f8">tomorrow</strong>.</p>
+                <div style="background: #16161f; border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; padding: 20px; margin: 20px 0;">
+                    <p style="margin: 0 0 8px;"><strong>Service:</strong> ${serviceName}</p>
+                    <p style="margin: 0 0 8px;"><strong>Date:</strong> ${date}</p>
+                    <p style="margin: 0;"><strong>Time:</strong> ${startTime}</p>
+                </div>
+                <p style="color: #606078; font-size: 0.85rem;">You will receive another reminder 2 hours before your appointment.</p>
+            </div>
+        `
+   });
+};
+
 export {
    sendOtpEmail,
    sendWelcomeEmail,
    sendBookingConfirmation,
    sendReminderEmail,
+   sendDayBeforeReminder,
    sendCancellationEmail,
    sendWaitlistEmail
 };

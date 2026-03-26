@@ -79,7 +79,8 @@ CREATE TABLE IF NOT EXISTS bookings (
     payment_status  ENUM('pending', 'paid', 'refunded', 'failed')
                                    DEFAULT 'pending',
     notes           TEXT,                              -- optional note from customer
-    reminder_sent   BOOLEAN        DEFAULT FALSE,      -- cron job flag
+    reminder_day_before_sent  BOOLEAN DEFAULT FALSE,
+    reminder_same_day_sent    BOOLEAN DEFAULT FALSE,      -- cron job flag
     created_at      TIMESTAMP      DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (user_id)    REFERENCES users(id)    ON DELETE CASCADE,
