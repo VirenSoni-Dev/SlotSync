@@ -14,6 +14,7 @@ import authRoutes from './routes/authRoutes.js';
 import serviceRoutes from './routes/serviceRoutes.js';
 import slotRoutes from './routes/slotRoutes.js';
 import bookingRoutes from './routes/bookingRoutes.js';
+import paymentRoutes from './routes/paymentRoutes.js';
 
 const app = express();
 
@@ -45,18 +46,19 @@ app.use('/api/auth', authRoutes);
 app.use('/api/services', serviceRoutes);
 app.use('/api/slots', slotRoutes);
 app.use('/api/bookings', bookingRoutes);
+app.use('/api/payment', paymentRoutes);
 
 app.get('/api/health', (req, res) => {
-   res.json({
-      success: true,
-      message: 'Server is running',
-      timestamp: new Date().toISOString()
-   });
+    res.json({
+        success: true,
+        message: 'Server is running',
+        timestamp: new Date().toISOString()
+    });
 });
 
 // 404 handler — catches any route that doesn't exist
 app.use((req, res) => {
-   res.status(404).send(`
+    res.status(404).send(`
         <html>
             <head>
                 <style>
