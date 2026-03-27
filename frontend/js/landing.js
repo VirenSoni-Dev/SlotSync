@@ -68,20 +68,18 @@ async function loadServices() {
 // Maps service name keywords to Hugeicons class names
 function getServiceIcon(name = '') {
    const n = name.toLowerCase();
-   if (n.includes('hair') || n.includes('salon')) return 'hgi-scissor';
+   if (n.includes('hair') || n.includes('salon'))                      return 'hgi-scissor';
    if (n.includes('doctor') || n.includes('consult')
-      || n.includes('clinic') || n.includes('health')) return 'hgi-stethoscope-02';
+      || n.includes('clinic') || n.includes('health'))                 return 'hgi-stethoscope-02';
    if (n.includes('tutor') || n.includes('math')
-      || n.includes('teach') || n.includes('class')) return 'hgi-mortarboard-01';
-   if (n.includes('repair') || n.includes('fix')
-      || n.includes('service')) return 'hgi-wrench-01';
-   if (n.includes('yoga') || n.includes('fitness')
-      || n.includes('gym')) return 'hgi-dumbbell-01';
-   if (n.includes('massage') || n.includes('spa')) return 'hgi-spa-01';
-   if (n.includes('dental') || n.includes('teeth')) return 'hgi-tooth-02';
-   if (n.includes('legal') || n.includes('lawyer')) return 'hgi-scales-02';
-   if (n.includes('photo') || n.includes('shoot')) return 'hgi-camera-01';
-   return 'hgi-calendar-check-in';                     // default fallback
+      || n.includes('teach') || n.includes('class'))                   return 'hgi-mortarboard-01';
+   if (n.includes('repair') || n.includes('fix'))                      return 'hgi-wrench-01';
+   if (n.includes('yoga') || n.includes('fitness') || n.includes('gym')) return 'hgi-dumbbell-01';
+   if (n.includes('massage') || n.includes('spa'))                     return 'hgi-spa-01';
+   if (n.includes('dental') || n.includes('teeth'))                    return 'hgi-tooth-02';
+   if (n.includes('legal') || n.includes('lawyer'))                    return 'hgi-scales-02';
+   if (n.includes('photo') || n.includes('shoot'))                     return 'hgi-camera-01';
+   return 'hgi-calendar-02';   // default fallback — confirmed working
 }
 
 // ── Update navbar if user is already logged in ──

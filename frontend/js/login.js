@@ -16,6 +16,16 @@ const authSuccess = document.getElementById('authSuccess');
 const togglePassword = document.getElementById('togglePassword');
 const toggleIcon = document.getElementById('toggleIcon');
 
+// ── Redirect based on role ──
+// Defined first so it can be used by the auto-redirect check below
+function redirectByRole(role) {
+   if (role === 'admin') {
+      window.location.href = 'admin/dashboard.html';
+   } else {
+      window.location.href = 'services.html';
+   }
+}
+
 // ── Redirect if already logged in ──
 if (localStorage.getItem('token')) {
    const user = JSON.parse(localStorage.getItem('user') || '{}');
@@ -115,12 +125,3 @@ loginBtn.addEventListener('click', async () => {
       loginBtn.disabled = false;
    }
 });
-
-// ── Redirect based on role ──
-function redirectByRole(role) {
-   if (role === 'admin') {
-      window.location.href = 'admin/dashboard.html';
-   } else {
-      window.location.href = 'services.html';
-   }
-}

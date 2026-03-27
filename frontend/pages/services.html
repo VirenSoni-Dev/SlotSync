@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Services — SlotSync</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      rel="stylesheet" />
+   <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+   <link rel="stylesheet" href="../css/main.css" />
+   <link rel="stylesheet" href="../css/services.css" />
+</head>
+
+<body>
+
+   <!-- ===================== NAVBAR ===================== -->
+   <nav class="navbar scrolled" id="navbar">
+      <div class="nav-inner">
+         <a href="../index.html" class="nav-logo">
+            <img src="../assets/logo.svg" alt="SlotSync Logo" />
+            SlotSync
+         </a>
+         <ul class="nav-links" id="navLinks">
+            <li><a href="../index.html">Home</a></li>
+            <li><a href="services.html" class="active">Services</a></li>
+         </ul>
+         <div class="nav-actions" id="navActions">
+            <!-- Updated by JS based on login state -->
+            <a href="login.html" class="btn-ghost">Log in</a>
+            <a href="register.html" class="btn-primary">Get Started</a>
+         </div>
+         <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+         </button>
+      </div>
+   </nav>
+
+   <!-- ===================== PAGE HEADER ===================== -->
+   <section class="page-header">
+      <div class="page-header-inner">
+         <div class="section-tag">Browse</div>
+         <h1>All Services</h1>
+         <p>Pick a service, choose a slot and book in seconds.</p>
+      </div>
+   </section>
+
+   <!-- ===================== FILTERS + SEARCH ===================== -->
+   <section class="services-controls">
+      <div class="controls-inner">
+         <div class="search-wrap">
+            <i class="hgi hgi-stroke hgi-search-01"></i>
+            <input type="text" id="searchInput" placeholder="Search services..." />
+         </div>
+         <div class="sort-wrap">
+            <label for="sortSelect">Sort by</label>
+            <select id="sortSelect">
+               <option value="default">Default</option>
+               <option value="price-asc">Price: Low to High</option>
+               <option value="price-desc">Price: High to Low</option>
+               <option value="duration-asc">Duration: Shortest</option>
+            </select>
+         </div>
+      </div>
+   </section>
+
+   <!-- ===================== SERVICES GRID ===================== -->
+   <section class="services-section">
+      <div class="services-inner">
+
+         <!-- Loading state -->
+         <div class="services-loading" id="servicesLoading">
+            <div class="loading-spinner"></div>
+            <p>Loading services...</p>
+         </div>
+
+         <!-- Empty state -->
+         <div class="services-empty" id="servicesEmpty" style="display:none;">
+            <div class="empty-icon">🔍</div>
+            <h3>No services found</h3>
+            <p>Try a different search term.</p>
+         </div>
+
+         <!-- Services grid -->
+         <div class="services-grid" id="servicesGrid" style="display:none;"></div>
+
+      </div>
+   </section>
+
+   <!-- ===================== FOOTER ===================== -->
+   <footer class="footer">
+      <div class="footer-inner">
+         <div class="footer-brand">
+            <a href="../index.html" class="nav-logo">
+               <img src="../assets/logo.svg" alt="SlotSync Logo" />
+               SlotSync
+            </a>
+            <p>Appointment booking for modern businesses.</p>
+         </div>
+         <div class="footer-links">
+            <div class="footer-col">
+               <h4>Platform</h4>
+               <a href="services.html">Browse Services</a>
+               <a href="register.html">Sign Up</a>
+               <a href="login.html">Log In</a>
+            </div>
+            <div class="footer-col">
+               <h4>Account</h4>
+               <a href="my-bookings.html">My Bookings</a>
+               <a href="profile.html">Profile</a>
+            </div>
+         </div>
+      </div>
+      <div class="footer-bottom">
+         <p>© 2025 SlotSync. Built with Node.js + MySQL.</p>
+      </div>
+   </footer>
+
+   <script type="module" src="../js/services.js"></script>
+</body>
+
+</html>

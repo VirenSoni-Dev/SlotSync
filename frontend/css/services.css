@@ -1,0 +1,315 @@
+/* ============================================================
+   services.css — services listing page
+   ============================================================ */
+
+/* ── Active nav link ── */
+.nav-links a.active {
+   color: var(--clr-accent-2);
+}
+
+/* ── Page header ── */
+.page-header {
+   padding-top: calc(var(--nav-height) + 48px);
+   padding-bottom: 48px;
+   background: var(--clr-bg-2);
+   border-bottom: 1px solid var(--clr-border);
+}
+
+.page-header-inner {
+   max-width: var(--max-w);
+   margin: 0 auto;
+   padding: 0 24px;
+}
+
+.page-header h1 {
+   font-size: clamp(2rem, 4vw, 3rem);
+   color: var(--clr-text);
+   margin-bottom: 10px;
+}
+
+.page-header p {
+   font-size: 1.05rem;
+   color: var(--clr-text-2);
+}
+
+/* ── Controls bar ── */
+.services-controls {
+   background: var(--clr-bg-2);
+   border-bottom: 1px solid var(--clr-border);
+   padding: 16px 0;
+   position: sticky;
+   top: var(--nav-height);
+   z-index: 10;
+   backdrop-filter: blur(12px);
+}
+
+.controls-inner {
+   max-width: var(--max-w);
+   margin: 0 auto;
+   padding: 0 24px;
+   display: flex;
+   align-items: center;
+   gap: 16px;
+   flex-wrap: wrap;
+}
+
+.search-wrap {
+   flex: 1;
+   min-width: 200px;
+   position: relative;
+   display: flex;
+   align-items: center;
+}
+
+.search-wrap i {
+   position: absolute;
+   left: 14px;
+   font-size: 1rem;
+   color: var(--clr-text-3);
+   pointer-events: none;
+}
+
+.search-wrap input {
+   width: 100%;
+   background: var(--clr-bg-3);
+   border: 1.5px solid var(--clr-border);
+   border-radius: var(--radius);
+   color: var(--clr-text);
+   font-family: var(--font-body);
+   font-size: 0.9rem;
+   padding: 10px 14px 10px 40px;
+   outline: none;
+   transition: border-color var(--transition);
+}
+
+.search-wrap input:focus {
+   border-color: var(--clr-accent);
+}
+
+.search-wrap input::placeholder {
+   color: var(--clr-text-3);
+}
+
+.sort-wrap {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   flex-shrink: 0;
+}
+
+.sort-wrap label {
+   font-size: 0.85rem;
+   color: var(--clr-text-3);
+   white-space: nowrap;
+}
+
+.sort-wrap select {
+   background: var(--clr-bg-3);
+   border: 1.5px solid var(--clr-border);
+   border-radius: var(--radius);
+   color: var(--clr-text);
+   font-family: var(--font-body);
+   font-size: 0.88rem;
+   padding: 9px 14px;
+   outline: none;
+   cursor: pointer;
+   transition: border-color var(--transition);
+}
+
+.sort-wrap select:focus {
+   border-color: var(--clr-accent);
+}
+
+/* ── Services section ── */
+.services-section {
+   min-height: 60vh;
+   padding: 48px 0 80px;
+}
+
+.services-inner {
+   max-width: var(--max-w);
+   margin: 0 auto;
+   padding: 0 24px;
+}
+
+/* ── Loading state ── */
+.services-loading {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 16px;
+   padding: 80px 0;
+   color: var(--clr-text-3);
+   font-size: 0.9rem;
+}
+
+.loading-spinner {
+   width: 36px;
+   height: 36px;
+   border: 3px solid var(--clr-border);
+   border-top-color: var(--clr-accent);
+   border-radius: 50%;
+   animation: spin 0.7s linear infinite;
+}
+
+/* ── Empty state ── */
+.services-empty {
+   text-align: center;
+   padding: 80px 0;
+}
+
+.empty-icon {
+   font-size: 3rem;
+   margin-bottom: 16px;
+}
+
+.services-empty h3 {
+   font-size: 1.2rem;
+   color: var(--clr-text);
+   margin-bottom: 8px;
+}
+
+.services-empty p {
+   color: var(--clr-text-3);
+   font-size: 0.9rem;
+}
+
+/* ── Services grid ── */
+.services-grid {
+   display: grid;
+   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+   gap: 20px;
+}
+
+/* ── Service card ── */
+.service-card-full {
+   background: var(--clr-surface);
+   border: 1px solid var(--clr-border);
+   border-radius: var(--radius-lg);
+   padding: 28px 24px;
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
+   transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
+   animation: fadeUp 0.4s var(--ease) both;
+}
+
+.service-card-full:hover {
+   border-color: var(--clr-border-2);
+   transform: translateY(-4px);
+   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
+}
+
+.card-top {
+   display: flex;
+   align-items: flex-start;
+   gap: 14px;
+}
+
+.card-icon-wrap {
+   width: 48px;
+   height: 48px;
+   background: rgba(108, 99, 255, 0.1);
+   border: 1px solid rgba(108, 99, 255, 0.2);
+   border-radius: 12px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-shrink: 0;
+   font-size: 1.4rem;
+}
+
+.card-icon-wrap i {
+   font-size: 1.3rem;
+   color: var(--clr-accent-2);
+}
+
+.card-info {
+   flex: 1;
+}
+
+.card-info h3 {
+   font-size: 1rem;
+   color: var(--clr-text);
+   margin-bottom: 6px;
+}
+
+.card-info p {
+   font-size: 0.85rem;
+   color: var(--clr-text-2);
+   line-height: 1.5;
+}
+
+.card-meta {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   flex-wrap: wrap;
+}
+
+.card-price {
+   font-family: var(--font-display);
+   font-weight: 700;
+   font-size: 1.2rem;
+   color: var(--clr-accent-2);
+}
+
+.card-duration {
+   display: flex;
+   align-items: center;
+   gap: 5px;
+   font-size: 0.8rem;
+   color: var(--clr-text-3);
+   background: var(--clr-bg-3);
+   padding: 4px 10px;
+   border-radius: 99px;
+   border: 1px solid var(--clr-border);
+}
+
+.card-duration i {
+   font-size: 0.8rem;
+}
+
+.card-book-btn {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   gap: 8px;
+   background: var(--clr-accent);
+   color: #fff;
+   font-family: var(--font-display);
+   font-weight: 600;
+   font-size: 0.9rem;
+   padding: 11px;
+   border-radius: var(--radius);
+   border: none;
+   cursor: pointer;
+   text-decoration: none;
+   transition: background var(--transition), transform var(--transition);
+   margin-top: auto;
+}
+
+.card-book-btn:hover {
+   background: #7c75ff;
+   transform: translateY(-1px);
+}
+
+.card-book-btn i {
+   font-size: 0.9rem;
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+   .services-grid {
+      grid-template-columns: 1fr;
+   }
+
+   .controls-inner {
+      flex-direction: column;
+      align-items: stretch;
+   }
+
+   .sort-wrap {
+      justify-content: space-between;
+   }
+}

@@ -28,6 +28,7 @@ async function request(method, endpoint, body = null, auth = true) {
    const options = {
       method,
       headers: getHeaders(auth),
+      credentials: 'include',  // needed for httpOnly refresh token cookie
    };
    if (body) options.body = JSON.stringify(body);
 
@@ -35,7 +36,6 @@ async function request(method, endpoint, body = null, auth = true) {
    const data = await response.json();
 
    if (!response.ok) {
-      // Throw the error message from backend
       throw new Error(data.message || 'Something went wrong');
    }
 
