@@ -114,3 +114,27 @@ window.logout = function () {
 // ── Init ──
 loadServices();
 updateNavForLoggedInUser();
+// ── Get Started modal ──
+const gsModal     = document.getElementById('gsModal');
+const gsModalClose = document.getElementById('gsModalClose');
+
+function openGsModal()  { gsModal.style.display = 'flex'; }
+function closeGsModal() { gsModal.style.display = 'none'; }
+
+document.getElementById('getStartedBtn').addEventListener('click', openGsModal);
+
+// CTA banner button — only exists when not logged in
+const ctaBtn = document.getElementById('ctaGetStartedBtn');
+if (ctaBtn) ctaBtn.addEventListener('click', openGsModal);
+
+gsModalClose.addEventListener('click', closeGsModal);
+
+// Click outside card to close
+gsModal.addEventListener('click', e => {
+   if (e.target === gsModal) closeGsModal();
+});
+
+// Esc key to close
+document.addEventListener('keydown', e => {
+   if (e.key === 'Escape') closeGsModal();
+});

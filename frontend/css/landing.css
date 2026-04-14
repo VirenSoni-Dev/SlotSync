@@ -742,3 +742,157 @@
       gap: 16px;
    }
 }
+
+/* ============================================================
+   Get Started choice modal
+   ============================================================ */
+
+.gs-modal-overlay {
+   position: fixed;
+   inset: 0;
+   background: rgba(5, 5, 10, 0.78);
+   backdrop-filter: blur(6px);
+   -webkit-backdrop-filter: blur(6px);
+   z-index: 300;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 24px;
+}
+
+.gs-modal-card {
+   background: var(--clr-bg-2);
+   border: 1px solid var(--clr-border-2);
+   border-radius: var(--radius-lg);
+   padding: 36px;
+   width: 100%;
+   max-width: 480px;
+   position: relative;
+   animation: gsModalIn 0.25s var(--ease) forwards;
+}
+
+@keyframes gsModalIn {
+   from { opacity: 0; transform: translateY(16px) scale(0.97); }
+   to   { opacity: 1; transform: translateY(0)    scale(1);    }
+}
+
+.gs-modal-close {
+   position: absolute;
+   top: 16px;
+   right: 16px;
+   width: 32px;
+   height: 32px;
+   border-radius: 6px;
+   background: transparent;
+   border: 1px solid var(--clr-border);
+   color: var(--clr-text-3);
+   font-size: 1.2rem;
+   line-height: 1;
+   cursor: pointer;
+   transition: background var(--transition), color var(--transition);
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.gs-modal-close:hover {
+   background: var(--clr-bg-3);
+   color: var(--clr-text);
+}
+
+.gs-modal-header {
+   margin-bottom: 28px;
+}
+
+.gs-modal-header h2 {
+   font-size: 1.35rem;
+   color: var(--clr-text);
+   margin-bottom: 6px;
+}
+
+.gs-modal-header p {
+   font-size: 0.9rem;
+   color: var(--clr-text-2);
+}
+
+.gs-modal-choices {
+   display: flex;
+   flex-direction: column;
+   gap: 12px;
+   margin-bottom: 24px;
+}
+
+.gs-choice-card {
+   display: flex;
+   align-items: center;
+   gap: 16px;
+   background: var(--clr-surface);
+   border: 1px solid var(--clr-border);
+   border-radius: var(--radius);
+   padding: 18px 20px;
+   text-decoration: none;
+   transition: border-color var(--transition), background var(--transition),
+               transform var(--transition);
+}
+
+.gs-choice-card:hover {
+   border-color: var(--clr-accent);
+   background: rgba(108, 99, 255, 0.06);
+   transform: translateY(-2px);
+}
+
+.gs-choice-icon {
+   font-size: 1.8rem;
+   flex-shrink: 0;
+   width: 48px;
+   text-align: center;
+}
+
+.gs-choice-body {
+   flex: 1;
+   min-width: 0;
+}
+
+.gs-choice-body h3 {
+   font-size: 0.95rem;
+   font-weight: 700;
+   color: var(--clr-text);
+   margin-bottom: 3px;
+}
+
+.gs-choice-body p {
+   font-size: 0.82rem;
+   color: var(--clr-text-2);
+}
+
+.gs-choice-arrow {
+   color: var(--clr-text-3);
+   flex-shrink: 0;
+   transition: color var(--transition), transform var(--transition);
+}
+
+.gs-choice-card:hover .gs-choice-arrow {
+   color: var(--clr-accent-2);
+   transform: translateX(3px);
+}
+
+.gs-modal-login {
+   text-align: center;
+   font-size: 0.85rem;
+   color: var(--clr-text-3);
+}
+
+.gs-modal-login a {
+   color: var(--clr-accent-2);
+   transition: color var(--transition);
+}
+
+.gs-modal-login a:hover {
+   color: var(--clr-text);
+}
+
+@media (max-width: 480px) {
+   .gs-modal-card {
+      padding: 24px 20px;
+   }
+}

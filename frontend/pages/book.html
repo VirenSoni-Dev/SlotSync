@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Book Appointment — SlotSync</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      rel="stylesheet" />
+   <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+   <!-- Razorpay SDK — loads their checkout modal -->
+   <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+   <link rel="stylesheet" href="../css/main.css" />
+   <link rel="stylesheet" href="../css/booking.css" />
+</head>
+
+<body>
+
+   <!-- ===================== NAVBAR ===================== -->
+   <nav class="navbar scrolled" id="navbar">
+      <div class="nav-inner">
+         <a href="../index.html" class="nav-logo">
+            <img src="../assets/logo.svg" alt="SlotSync Logo" />
+            SlotSync
+         </a>
+         <ul class="nav-links" id="navLinks">
+            <li><a href="services.html">Services</a></li>
+            <li><a href="my-bookings.html">My Bookings</a></li>
+         </ul>
+         <div class="nav-actions" id="navActions"></div>
+         <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+         </button>
+      </div>
+   </nav>
+
+   <!-- ===================== BOOKING LAYOUT ===================== -->
+   <main class="booking-layout">
+
+      <!-- Left — Steps -->
+      <div class="booking-steps-wrap">
+
+         <!-- Step indicator -->
+         <div class="step-indicator">
+            <div class="step-dot active" id="dot1">1</div>
+            <div class="step-line" id="line1"></div>
+            <div class="step-dot" id="dot2">2</div>
+            <div class="step-line" id="line2"></div>
+            <div class="step-dot" id="dot3">3</div>
+         </div>
+         <div class="step-labels">
+            <span class="step-label active" id="label1">Service</span>
+            <span class="step-label" id="label2">Date & Slot</span>
+            <span class="step-label" id="label3">Payment</span>
+         </div>
+
+         <!-- ── Step 1: Service details ── -->
+         <div class="booking-step" id="step1">
+            <h2>Your Service</h2>
+
+            <!-- Loading -->
+            <div id="serviceLoading" class="step-loading">
+               <div class="loading-spinner"></div>
+               <p>Loading service...</p>
+            </div>
+
+            <!-- Service card -->
+            <div id="serviceCard" class="selected-service" style="display:none;">
+               <div class="selected-service-icon" id="serviceIcon"></div>
+               <div class="selected-service-info">
+                  <h3 id="serviceName"></h3>
+                  <p id="serviceDesc"></p>
+                  <div class="selected-service-meta">
+                     <span class="meta-chip">
+                        <i class="hgi hgi-stroke hgi-clock-01"></i>
+                        <span id="serviceDuration"></span>
+                     </span>
+                     <span class="meta-chip price-chip">
+                        ₹<span id="servicePrice"></span>
+                     </span>
+                  </div>
+               </div>
+            </div>
+
+            <!-- Optional notes -->
+            <div class="field-group" style="margin-top: 20px;" id="notesWrap" style="display:none;">
+               <label for="bookingNotes">Notes for the provider <span class="optional">(optional)</span></label>
+               <textarea id="bookingNotes" placeholder="Any special requests or information..." rows="3"></textarea>
+            </div>
+
+            <button class="btn-primary btn-full step-btn" id="step1Next">
+               Continue to Pick a Slot
+               <i class="hgi hgi-stroke hgi-arrow-right-01"></i>
+            </button>
+         </div>
+
+         <!-- ── Step 2: Date + Slot ── -->
+         <div class="booking-step" id="step2" style="display:none;">
+            <h2>Pick a Date & Slot</h2>
+
+            <div class="field-group">
+               <label for="datePicker">Select Date</label>
+               <input type="date" id="datePicker" class="date-input" />
+            </div>
+
+            <!-- Slots area -->
+            <div id="slotsArea" style="display:none;">
+               <div class="slots-label">
+                  Available time slots
+                  <span id="slotsDate"></span>
+               </div>
+
+               <!-- Loading -->
+               <div id="slotsLoading" class="step-loading" style="display:none;">
+                  <div class="loading-spinner"></div>
+               </div>
+
+               <!-- No slots -->
+               <div id="noSlots" class="no-slots" style="display:none;">
+                  😕 No slots available for this date. Try another day.
+               </div>
+
+               <!-- Slots grid -->
+               <div class="slots-grid" id="slotsGrid"></div>
+            </div>
+
+            <div class="step-btns">
+               <button class="btn-outline step-btn" id="step2Back">
+                  <i class="hgi hgi-stroke hgi-arrow-left-01"></i>
+                  Back
+               </button>
+               <button class="btn-primary step-btn" id="step2Next" disabled>
+                  Continue to Payment
+                  <i class="hgi hgi-stroke hgi-arrow-right-01"></i>
+               </button>
+            </div>
+         </div>
+
+         <!-- ── Step 3: Confirm + Pay ── -->
+         <div class="booking-step" id="step3" style="display:none;">
+            <h2>Confirm & Pay</h2>
+
+            <!-- Summary -->
+            <div class="booking-summary">
+               <div class="summary-row">
+                  <span class="summary-label">
+                     <i class="hgi hgi-stroke hgi-calendar-02"></i>
+                     Service
+                  </span>
+                  <span class="summary-value" id="summaryService"></span>
+               </div>
+               <div class="summary-row">
+                  <span class="summary-label">
+                     <i class="hgi hgi-stroke hgi-calendar-02"></i>
+                     Date
+                  </span>
+                  <span class="summary-value" id="summaryDate"></span>
+               </div>
+               <div class="summary-row">
+                  <span class="summary-label">
+                     <i class="hgi hgi-stroke hgi-clock-01"></i>
+                     Time
+                  </span>
+                  <span class="summary-value" id="summaryTime"></span>
+               </div>
+               <div class="summary-divider"></div>
+               <div class="summary-row summary-total">
+                  <span class="summary-label">Total</span>
+                  <span class="summary-value" id="summaryTotal"></span>
+               </div>
+            </div>
+
+            <div class="payment-note">
+               <i class="hgi hgi-stroke hgi-shield-key"></i>
+               Payments secured by Razorpay. Your card details are never stored.
+            </div>
+
+            <div class="booking-error" id="bookingError" style="display:none;"></div>
+
+            <button class="btn-primary btn-full step-btn" id="payBtn">
+               <span id="payBtnText">💳 Pay ₹<span id="payAmount"></span></span>
+               <span id="payBtnLoader" class="btn-spinner" style="display:none;"></span>
+            </button>
+
+            <div class="step-btns" style="margin-top: 12px;">
+               <button class="btn-outline step-btn" id="step3Back">
+                  <i class="hgi hgi-stroke hgi-arrow-left-01"></i>
+                  Back
+               </button>
+            </div>
+         </div>
+
+         <!-- ── Success state ── -->
+         <div class="booking-step booking-success" id="stepSuccess" style="display:none;">
+            <div class="success-icon">🎉</div>
+            <h2>Booking Confirmed!</h2>
+            <p>A confirmation has been sent to your email.</p>
+            <div class="success-details" id="successDetails"></div>
+            <a href="my-bookings.html" class="btn-primary btn-full" style="margin-top: 24px;">
+               View My Bookings
+               <i class="hgi hgi-stroke hgi-arrow-right-01"></i>
+            </a>
+         </div>
+
+      </div>
+
+      <!-- Right — sticky summary card -->
+      <div class="booking-sidebar" id="bookingSidebar">
+         <div class="sidebar-card">
+            <h3>Booking Summary</h3>
+            <div class="sidebar-empty" id="sidebarEmpty">
+               Select a service and slot to see your summary here.
+            </div>
+            <div class="sidebar-content" id="sidebarContent" style="display:none;">
+               <div class="sidebar-row">
+                  <span>Service</span>
+                  <span id="sbService">—</span>
+               </div>
+               <div class="sidebar-row">
+                  <span>Date</span>
+                  <span id="sbDate">—</span>
+               </div>
+               <div class="sidebar-row">
+                  <span>Time</span>
+                  <span id="sbTime">—</span>
+               </div>
+               <div class="sidebar-divider"></div>
+               <div class="sidebar-row sidebar-total">
+                  <span>Total</span>
+                  <span id="sbTotal">—</span>
+               </div>
+            </div>
+         </div>
+      </div>
+
+   </main>
+
+   <script type="module" src="../js/booking.js"></script>
+</body>
+
+</html>

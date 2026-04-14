@@ -50,6 +50,44 @@ const register = async (req, res, next) => {
    }
 };
 
+const registerAdmin = async (req, res, next) => {
+   try {
+      const { name, email, phone, password } = req.body;
+
+      // Check if email already exists
+      const existingUser = await userModel.findByEmail(email);
+      if (existingUser) {
+         // If they registered but never verified — resend OTP
+         if (!existingUser.is_verified) {
+            const otp = await otpService.generateAndStoreOtp(email, 'register');
+            await mailService.sendOtpEmail(email, otp, 'register');
+            return sendSuccess(res, 'Account exists but is unverified. OTP resent.', null, 200);
+         }
+         return sendError(res, 'An account with this email already exists.', 409);
+      }
+
+      // Hash password — 10 salt rounds is the standard
+      const hashedPassword = await bcrypt.hash(password, 10);
+
+      // Create user in DB
+      await userModel.createAdmin({ name, email, phone, password: hashedPassword });
+
+      // Generate OTP and send email
+      const otp = await otpService.generateAndStoreOtp(email, 'register');
+      await mailService.sendOtpEmail(email, otp, 'register');
+
+      return sendSuccess(
+         res,
+         'Account created. Please check your email for the OTP.',
+         null,
+         201
+      );
+
+   } catch (err) {
+      next(err); // passes to global errorHandler
+   }
+};
+
 // ============================================================
 //  POST /api/auth/verify-otp
 //  1. Find and validate OTP
@@ -261,6 +299,41 @@ const refreshToken = async (req, res, next) => {
    }
 };
 
+// PUT /api/auth/profile
+const updateProfile = async (req, res, next) => {
+   try {
+      const { name, phone } = req.body;
+
+      await userModel.updateProfile(req.user.id, { name, phone });
+      const updated = await userModel.findById(req.user.id);
+
+      return sendSuccess(res, 'Profile updated successfully.', { user: updated });
+   } catch (err) {
+      next(err);
+   }
+};
+
+// PUT /api/auth/change-password
+const changePassword = async (req, res, next) => {
+   try {
+      const { currentPassword, newPassword } = req.body;
+
+      const user = await userModel.findByIdWithPassword(req.user.id);
+
+      const isMatch = await bcrypt.compare(currentPassword, user.password);
+      if (!isMatch) {
+         return sendError(res, 'Current password is incorrect.', 400);
+      }
+
+      const hashed = await bcrypt.hash(newPassword, 10);
+      await userModel.updatePassword(user.email, hashed);
+
+      return sendSuccess(res, 'Password changed successfully.');
+   } catch (err) {
+      next(err);
+   }
+};
+
 // ============================================================
 //  POST /api/auth/logout
 //  Clears the refresh token cookie
@@ -272,11 +345,14 @@ const logout = async (req, res) => {
 
 export {
    register,
+   registerAdmin,
    verifyOtp,
    sendOtp,
    login,
    forgotPassword,
    resetPassword,
    refreshToken,
+   updateProfile,
+   changePassword,
    logout
 };

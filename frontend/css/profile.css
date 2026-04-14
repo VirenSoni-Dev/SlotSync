@@ -1,0 +1,476 @@
+/* ============================================================
+   profile.css — SlotSync Profile Page
+   Depends on: main.css (CSS variables, navbar, btn classes)
+   ============================================================ */
+
+/* ── Layout ── */
+.profile-main {
+   min-height: calc(100vh - var(--nav-height));
+   padding: 48px 24px 80px;
+   max-width: 960px;
+   margin: 0 auto;
+}
+
+/* ── Profile Header ── */
+.profile-header {
+   display: flex;
+   align-items: center;
+   gap: 24px;
+   margin-bottom: 40px;
+   padding: 32px;
+   background: var(--clr-surface);
+   border: 1px solid rgba(108, 99, 255, 0.15);
+   border-radius: var(--radius-lg);
+   position: relative;
+   overflow: hidden;
+}
+
+.profile-header::before {
+   content: '';
+   position: absolute;
+   top: -40px;
+   right: -40px;
+   width: 200px;
+   height: 200px;
+   background: var(--clr-accent-glow);
+   border-radius: 50%;
+   filter: blur(60px);
+   pointer-events: none;
+}
+
+.profile-avatar {
+   width: 80px;
+   height: 80px;
+   min-width: 80px;
+   border-radius: 50%;
+   background: linear-gradient(135deg, var(--clr-accent), var(--clr-accent-2));
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   font-family: var(--font-display);
+   font-size: 2rem;
+   font-weight: 700;
+   color: #fff;
+   box-shadow: 0 0 0 4px rgba(108, 99, 255, 0.2);
+}
+
+.profile-header-info {
+   display: flex;
+   flex-direction: column;
+   gap: 4px;
+}
+
+.profile-name {
+   font-family: var(--font-display);
+   font-size: 1.6rem;
+   font-weight: 700;
+   color: var(--clr-text);
+   margin: 0;
+   line-height: 1.2;
+}
+
+.profile-role {
+   font-family: var(--font-body);
+   font-size: 0.85rem;
+   color: var(--clr-accent-2);
+   font-weight: 500;
+   text-transform: uppercase;
+   letter-spacing: 0.08em;
+   margin: 0;
+}
+
+.profile-since {
+   font-family: var(--font-body);
+   font-size: 0.875rem;
+   color: var(--clr-text-3);
+   margin: 0;
+}
+
+/* ── Cards Grid ── */
+.profile-grid {
+   display: grid;
+   grid-template-columns: 1fr 1fr;
+   gap: 20px;
+}
+
+.profile-card {
+   background: var(--clr-surface);
+   border: 1px solid rgba(255, 255, 255, 0.06);
+   border-radius: var(--radius-lg);
+   padding: 28px;
+   transition: border-color 0.2s ease;
+}
+
+.profile-card:hover {
+   border-color: rgba(108, 99, 255, 0.2);
+}
+
+/* Card that spans full width */
+.card-full {
+   grid-column: 1 / -1;
+}
+
+/* ── Card Header ── */
+.card-header {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   margin-bottom: 24px;
+}
+
+.card-title {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+
+.card-icon {
+   font-size: 1.25rem;
+   line-height: 1;
+}
+
+.card-title h2 {
+   font-family: var(--font-display);
+   font-size: 1.05rem;
+   font-weight: 600;
+   color: var(--clr-text);
+   margin: 0;
+}
+
+/* ── Edit button ── */
+.btn-edit {
+   display: flex;
+   align-items: center;
+   gap: 6px;
+   padding: 6px 14px;
+   background: rgba(108, 99, 255, 0.1);
+   border: 1px solid rgba(108, 99, 255, 0.25);
+   border-radius: 8px;
+   color: var(--clr-accent-2);
+   font-family: var(--font-body);
+   font-size: 0.82rem;
+   font-weight: 500;
+   cursor: pointer;
+   transition: background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.btn-edit:hover {
+   background: rgba(108, 99, 255, 0.18);
+   border-color: var(--clr-accent);
+   color: #fff;
+}
+
+.btn-edit i {
+   font-size: 0.95rem;
+}
+
+/* ── Info rows ── */
+.info-view {
+   display: flex;
+   flex-direction: column;
+   gap: 4px;
+}
+
+.info-row {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 12px 0;
+   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.info-row:last-child {
+   border-bottom: none;
+}
+
+.info-label {
+   display: flex;
+   align-items: center;
+   gap: 8px;
+   font-family: var(--font-body);
+   font-size: 0.875rem;
+   color: var(--clr-text-3);
+   font-weight: 400;
+}
+
+.info-label i {
+   font-size: 1rem;
+   color: var(--clr-text-3);
+}
+
+.info-value {
+   font-family: var(--font-body);
+   font-size: 0.9rem;
+   color: var(--clr-text);
+   font-weight: 500;
+   text-align: right;
+   max-width: 55%;
+   word-break: break-word;
+}
+
+/* ── Badges ── */
+.role-badge {
+   display: inline-block;
+   padding: 3px 10px;
+   border-radius: 20px;
+   font-size: 0.78rem;
+   font-weight: 600;
+   font-family: var(--font-body);
+   text-transform: capitalize;
+   background: rgba(108, 99, 255, 0.15);
+   color: var(--clr-accent-2);
+   border: 1px solid rgba(108, 99, 255, 0.25);
+}
+
+.status-badge {
+   font-family: var(--font-body);
+   font-size: 0.82rem;
+   font-weight: 500;
+}
+
+.status-verified {
+   color: var(--clr-green);
+}
+
+/* ── Quick links ── */
+.quick-links {
+   margin-top: 20px;
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+}
+
+.quick-link {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+   padding: 10px 14px;
+   background: var(--clr-bg-3);
+   border-radius: var(--radius);
+   border: 1px solid rgba(255, 255, 255, 0.05);
+   color: var(--clr-text-2);
+   font-family: var(--font-body);
+   font-size: 0.875rem;
+   font-weight: 500;
+   text-decoration: none;
+   transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.quick-link:hover {
+   background: rgba(108, 99, 255, 0.08);
+   border-color: rgba(108, 99, 255, 0.2);
+   color: var(--clr-text);
+}
+
+.quick-link i {
+   font-size: 1rem;
+   color: var(--clr-accent-2);
+}
+
+.quick-link .arrow {
+   margin-left: auto;
+   color: var(--clr-text-3);
+   font-size: 0.9rem;
+   transition: transform 0.2s;
+}
+
+.quick-link:hover .arrow {
+   transform: translateX(3px);
+}
+
+/* ── Edit Form ── */
+.info-form {
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
+}
+
+.password-form {
+   display: flex;
+   flex-direction: column;
+   gap: 20px;
+}
+
+.password-fields {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 16px;
+}
+
+.form-group {
+   display: flex;
+   flex-direction: column;
+   gap: 6px;
+}
+
+.form-group label {
+   font-family: var(--font-body);
+   font-size: 0.82rem;
+   font-weight: 500;
+   color: var(--clr-text-2);
+   letter-spacing: 0.02em;
+}
+
+.input-wrap {
+   position: relative;
+   display: flex;
+   align-items: center;
+}
+
+.input-wrap>i:first-child {
+   position: absolute;
+   left: 12px;
+   font-size: 1rem;
+   color: var(--clr-text-3);
+   pointer-events: none;
+   transition: color 0.2s;
+}
+
+.input-wrap input {
+   width: 100%;
+   padding: 10px 12px 10px 38px;
+   background: var(--clr-bg-3);
+   border: 1px solid rgba(255, 255, 255, 0.08);
+   border-radius: var(--radius);
+   color: var(--clr-text);
+   font-family: var(--font-body);
+   font-size: 0.9rem;
+   transition: border-color 0.2s, box-shadow 0.2s;
+   outline: none;
+}
+
+.input-wrap input:focus {
+   border-color: var(--clr-accent);
+   box-shadow: 0 0 0 3px rgba(108, 99, 255, 0.15);
+}
+
+.input-wrap input:focus+i,
+.input-wrap:focus-within>i:first-child {
+   color: var(--clr-accent-2);
+}
+
+/* password toggle button */
+.toggle-pw {
+   position: absolute;
+   right: 10px;
+   background: none;
+   border: none;
+   cursor: pointer;
+   color: var(--clr-text-3);
+   padding: 4px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   transition: color 0.2s;
+}
+
+.toggle-pw:hover {
+   color: var(--clr-text-2);
+}
+
+.toggle-pw i {
+   font-size: 1rem;
+}
+
+/* Password input needs right padding for toggle button */
+.input-wrap input[type="password"],
+.input-wrap input[type="text"] {
+   padding-right: 38px;
+}
+
+/* ── Field errors ── */
+.field-error {
+   font-family: var(--font-body);
+   font-size: 0.78rem;
+   color: var(--clr-red);
+   min-height: 16px;
+   display: block;
+}
+
+/* ── Form actions ── */
+.form-actions {
+   display: flex;
+   align-items: center;
+   gap: 10px;
+}
+
+/* ── Form message (success / error banner) ── */
+.form-message {
+   padding: 10px 14px;
+   border-radius: var(--radius);
+   font-family: var(--font-body);
+   font-size: 0.875rem;
+   font-weight: 500;
+}
+
+.form-message.success {
+   background: rgba(34, 211, 165, 0.1);
+   border: 1px solid rgba(34, 211, 165, 0.25);
+   color: var(--clr-green);
+}
+
+.form-message.error {
+   background: rgba(248, 113, 113, 0.1);
+   border: 1px solid rgba(248, 113, 113, 0.25);
+   color: var(--clr-red);
+}
+
+/* ── Button size modifier ── */
+.btn-sm {
+   padding: 9px 20px;
+   font-size: 0.875rem;
+}
+
+/* ── Spinner on submit buttons ── */
+.btn-loader i {
+   display: inline-block;
+   animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+   to {
+      transform: rotate(360deg);
+   }
+}
+
+/* ── Utility ── */
+.hidden {
+   display: none !important;
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+   .profile-main {
+      padding: 28px 16px 60px;
+   }
+
+   .profile-header {
+      flex-direction: column;
+      text-align: center;
+      padding: 24px;
+      gap: 16px;
+   }
+
+   .profile-grid {
+      grid-template-columns: 1fr;
+   }
+
+   .card-full {
+      grid-column: 1;
+   }
+
+   .password-fields {
+      grid-template-columns: 1fr;
+   }
+
+   .info-row {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 4px;
+   }
+
+   .info-value {
+      text-align: left;
+      max-width: 100%;
+   }
+}

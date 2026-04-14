@@ -60,7 +60,7 @@ const getPeakHours = async (req, res, next) => {
    try {
       const [rows] = await db.query(
          `SELECT
-            TIME_FORMAT(sl.start_time, '%H:%i') AS hour
+            TIME_FORMAT(sl.start_time, '%H:%i') AS hour,
             COUNT(*) AS booking_count
           FROM bookings b
           JOIN slots sl ON b.slot_id = sl.id

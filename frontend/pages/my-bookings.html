@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>My Bookings — SlotSync</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      rel="stylesheet" />
+   <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+   <link rel="stylesheet" href="../css/main.css" />
+   <link rel="stylesheet" href="../css/my-bookings.css" />
+</head>
+
+<body>
+
+   <!-- ===================== NAVBAR ===================== -->
+   <nav class="navbar scrolled" id="navbar">
+      <div class="nav-inner">
+         <a href="../index.html" class="nav-logo">
+            <img src="../assets/logo.svg" alt="SlotSync Logo" />
+            SlotSync
+         </a>
+         <ul class="nav-links" id="navLinks">
+            <li><a href="services.html">Services</a></li>
+            <li><a href="my-bookings.html" class="active">My Bookings</a></li>
+            <li><a href="profile.html">Profile</a></li>
+         </ul>
+         <div class="nav-actions" id="navActions"></div>
+         <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+         </button>
+      </div>
+   </nav>
+
+   <!-- ===================== PAGE HEADER ===================== -->
+   <section class="page-header">
+      <div class="page-header-inner">
+         <div class="section-tag">Dashboard</div>
+         <h1>My Bookings</h1>
+         <p>View, manage and track all your appointments.</p>
+      </div>
+   </section>
+
+   <!-- ===================== FILTERS ===================== -->
+   <section class="bookings-controls">
+      <div class="controls-inner">
+         <div class="filter-tabs" id="filterTabs">
+            <button class="filter-tab active" data-filter="all">All</button>
+            <button class="filter-tab" data-filter="confirmed">✅ Confirmed</button>
+            <button class="filter-tab" data-filter="pending">⏳ Pending</button>
+            <button class="filter-tab" data-filter="completed">🏁 Completed</button>
+            <button class="filter-tab" data-filter="cancelled">❌ Cancelled</button>
+         </div>
+      </div>
+   </section>
+
+   <!-- ===================== BOOKINGS LIST ===================== -->
+   <section class="bookings-section">
+      <div class="bookings-inner">
+
+         <!-- Loading -->
+         <div class="bookings-loading" id="bookingsLoading">
+            <div class="loading-spinner"></div>
+            <p>Loading your bookings...</p>
+         </div>
+
+         <!-- Empty -->
+         <div class="bookings-empty" id="bookingsEmpty" style="display:none;">
+            <div class="empty-icon">📅</div>
+            <h3>No bookings found</h3>
+            <p id="emptyMessage">You haven't made any bookings yet.</p>
+            <a href="services.html" class="btn-primary" style="margin-top: 20px; display: inline-flex; gap: 8px;">
+               Browse Services
+               <i class="hgi hgi-stroke hgi-arrow-right-01"></i>
+            </a>
+         </div>
+
+         <!-- Bookings list -->
+         <div class="bookings-list" id="bookingsList" style="display:none;"></div>
+
+      </div>
+   </section>
+
+   <!-- ===================== CANCEL MODAL ===================== -->
+   <div class="modal-overlay" id="cancelModal" style="display:none;">
+      <div class="modal-card">
+         <div class="modal-icon">❌</div>
+         <h3>Cancel Booking?</h3>
+         <p>Are you sure you want to cancel this appointment? This action cannot be undone.</p>
+         <div class="modal-actions">
+            <button class="btn-outline" id="cancelModalClose">Keep Booking</button>
+            <button class="btn-danger" id="cancelModalConfirm">
+               <span id="cancelConfirmText">Yes, Cancel</span>
+               <span id="cancelConfirmLoader" class="btn-spinner" style="display:none;"></span>
+            </button>
+         </div>
+      </div>
+   </div>
+
+   <!-- ===================== FOOTER ===================== -->
+   <footer class="footer">
+      <div class="footer-inner">
+         <div class="footer-brand">
+            <a href="../index.html" class="nav-logo">
+               <img src="../assets/logo.svg" alt="SlotSync Logo" />
+               SlotSync
+            </a>
+            <p>Appointment booking for modern businesses.</p>
+         </div>
+         <div class="footer-links">
+            <div class="footer-col">
+               <h4>Platform</h4>
+               <a href="services.html">Browse Services</a>
+               <a href="my-bookings.html">My Bookings</a>
+            </div>
+            <div class="footer-col">
+               <h4>Account</h4>
+               <a href="profile.html">Profile</a>
+            </div>
+         </div>
+      </div>
+      <div class="footer-bottom">
+         <p>© 2025 SlotSync. Built with Node.js + MySQL.</p>
+      </div>
+   </footer>
+
+   <script type="module" src="../js/my-bookings.js"></script>
+</body>
+
+</html>

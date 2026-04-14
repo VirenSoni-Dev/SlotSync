@@ -34,7 +34,7 @@
          </ul>
          <div class="nav-actions" id="navActions">
             <a href="pages/login.html" class="btn-ghost">Log in</a>
-            <a href="pages/register.html" class="btn-primary">Get Started</a>
+            <button class="btn-primary" id="getStartedBtn">Get Started</button>
          </div>
          <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
             <span></span><span></span><span></span>
@@ -271,7 +271,7 @@
          <h2>Ready to stop managing appointments manually?</h2>
          <p>Join SlotSync and let your customers book themselves.</p>
          <div class="cta-buttons">
-            <a href="pages/register.html" class="btn-primary btn-large">Create your account</a>
+            <button class="btn-primary btn-large" id="ctaGetStartedBtn">Create your account</button>
             <a href="pages/login.html" class="btn-ghost btn-large">Already have one? Log in</a>
          </div>
       </div>
@@ -307,6 +307,37 @@
          <p>© 2025 SlotSync. Built with Node.js + MySQL.</p>
       </div>
    </footer>
+
+
+   <!-- ===================== GET STARTED MODAL ===================== -->
+   <div class="modal-overlay gs-modal-overlay" id="gsModal" style="display:none;" aria-modal="true" role="dialog">
+      <div class="gs-modal-card">
+         <button class="gs-modal-close" id="gsModalClose" aria-label="Close">&times;</button>
+         <div class="gs-modal-header">
+            <h2>Get started with SlotSync</h2>
+            <p>Choose how you want to use the platform.</p>
+         </div>
+         <div class="gs-modal-choices">
+            <a href="pages/register.html" class="gs-choice-card">
+               <div class="gs-choice-icon">🙋</div>
+               <div class="gs-choice-body">
+                  <h3>I'm a Customer</h3>
+                  <p>Book appointments with businesses near you.</p>
+               </div>
+               <svg class="gs-choice-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+            <a href="pages/business-register.html" class="gs-choice-card">
+               <div class="gs-choice-icon">🏢</div>
+               <div class="gs-choice-body">
+                  <h3>I'm a Business</h3>
+                  <p>Set up your profile and start accepting bookings.</p>
+               </div>
+               <svg class="gs-choice-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+         </div>
+         <p class="gs-modal-login">Already have an account? <a href="pages/login.html">Log in</a></p>
+      </div>
+   </div>
 
    <script type="module" src="js/landing.js"></script>
 </body>

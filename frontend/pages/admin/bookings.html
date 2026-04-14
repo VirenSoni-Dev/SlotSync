@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Bookings — SlotSync Admin</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      rel="stylesheet" />
+   <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+   <link rel="stylesheet" href="../../css/main.css" />
+   <link rel="stylesheet" href="../../css/admin.css" />
+</head>
+
+<body>
+
+   <!-- ===================== NAVBAR ===================== -->
+   <nav class="navbar scrolled" id="navbar">
+      <div class="nav-inner">
+         <a href="../../index.html" class="nav-logo">
+            <img src="../../assets/logo.svg" alt="SlotSync Logo" />
+            SlotSync
+         </a>
+         <ul class="nav-links" id="navLinks">
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="bookings.html" class="active">Bookings</a></li>
+            <li><a href="slots.html">Slots</a></li>
+            <li><a href="services.html">Services</a></li>
+         </ul>
+         <div class="nav-actions" id="navActions"></div>
+         <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+         </button>
+      </div>
+   </nav>
+
+   <!-- ===================== PAGE HEADER ===================== -->
+   <section class="admin-page-header">
+      <div class="admin-header-inner">
+         <div class="admin-header-left">
+            <div class="section-tag">Admin</div>
+            <h1>All Bookings</h1>
+            <p>View, filter and manage every booking on the platform.</p>
+         </div>
+      </div>
+   </section>
+
+   <!-- ===================== TOOLBAR ===================== -->
+   <section class="admin-toolbar-section">
+      <div class="admin-toolbar-inner">
+         <div class="search-wrap">
+            <i class="hgi hgi-stroke hgi-search-01"></i>
+            <input type="text" id="searchInput" placeholder="Search by name or email…" />
+         </div>
+         <div class="sort-wrap">
+            <label for="statusFilter">Status</label>
+            <select id="statusFilter">
+               <option value="">All</option>
+               <option value="pending">Pending</option>
+               <option value="confirmed">Confirmed</option>
+               <option value="cancelled">Cancelled</option>
+               <option value="completed">Completed</option>
+               <option value="failed">Failed</option>
+            </select>
+         </div>
+         <div class="sort-wrap">
+            <label for="dateFilter">Date</label>
+            <input type="date" id="dateFilter" />
+         </div>
+         <button class="btn-ghost" id="clearFiltersBtn">Clear</button>
+      </div>
+   </section>
+
+   <!-- ===================== BOOKINGS TABLE ===================== -->
+   <section class="admin-table-section">
+      <div class="admin-table-inner">
+
+         <div class="admin-table-header">
+            <div class="admin-table-title">
+               <span>🗓️</span>
+               <h2>Bookings</h2>
+            </div>
+            <span class="admin-result-count" id="bookingCount"></span>
+         </div>
+
+         <!-- Loading -->
+         <div class="admin-loading" id="bookingsLoading">
+            <div class="loader-spinner"></div>
+            <p>Loading bookings…</p>
+         </div>
+
+         <!-- Empty -->
+         <div class="admin-empty" id="bookingsEmpty" style="display:none;">
+            <div class="empty-icon">📭</div>
+            <h3>No bookings found</h3>
+            <p id="bookingsEmptyMessage">No bookings match your filters.</p>
+         </div>
+
+         <!-- Table -->
+         <div class="admin-table-wrap" id="bookingsTableWrap" style="display:none;">
+            <table class="admin-table">
+               <thead>
+                  <tr>
+                     <th>#</th>
+                     <th>Customer</th>
+                     <th>Service</th>
+                     <th>Date</th>
+                     <th>Time</th>
+                     <th>Price</th>
+                     <th>Status</th>
+                     <th>Payment</th>
+                     <th>Actions</th>
+                  </tr>
+               </thead>
+               <tbody id="bookingsTableBody"></tbody>
+            </table>
+         </div>
+
+      </div>
+   </section>
+
+   <!-- ===================== BOOKING DETAIL MODAL ===================== -->
+   <div class="modal-overlay" id="detailModal" style="display:none;">
+      <div class="modal-card modal-card--wide">
+         <div class="modal-header">
+            <h3>Booking Details</h3>
+            <button class="modal-close-btn" id="closeDetailModalBtn" aria-label="Close">
+               <i class="hgi hgi-stroke hgi-cancel-01"></i>
+            </button>
+         </div>
+
+         <!-- Populated by JS -->
+         <div id="detailContent"></div>
+
+         <div class="modal-actions modal-actions--left" id="detailModalActions">
+            <button class="btn-outline" id="closeDetailBtn">Close</button>
+            <button class="btn-danger" id="cancelBookingBtn" style="display:none;">
+               <span id="cancelBookingText">Cancel Booking</span>
+               <span id="cancelBookingLoader" class="btn-spinner" style="display:none;"></span>
+            </button>
+         </div>
+      </div>
+   </div>
+
+   <!-- ===================== FOOTER ===================== -->
+   <footer class="footer">
+      <div class="footer-inner">
+         <div class="footer-brand">
+            <a href="../../index.html" class="nav-logo">
+               <img src="../../assets/logo.svg" alt="SlotSync Logo" />
+               SlotSync
+            </a>
+            <p>Appointment booking for modern businesses.</p>
+         </div>
+         <div class="footer-links">
+            <div class="footer-col">
+               <h4>Admin</h4>
+               <a href="dashboard.html">Dashboard</a>
+               <a href="bookings.html">Bookings</a>
+               <a href="slots.html">Slots</a>
+               <a href="services.html">Services</a>
+            </div>
+            <div class="footer-col">
+               <h4>Account</h4>
+               <a href="../profile.html">Profile</a>
+            </div>
+         </div>
+      </div>
+      <div class="footer-bottom">
+         <p>© 2025 SlotSync. Built with Node.js + MySQL.</p>
+      </div>
+   </footer>
+
+   <script type="module" src="../../js/admin/bookings.js"></script>
+</body>
+
+</html>

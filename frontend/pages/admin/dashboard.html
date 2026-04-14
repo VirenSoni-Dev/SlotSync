@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Dashboard — SlotSync Admin</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      rel="stylesheet" />
+   <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+   <link rel="stylesheet" href="../../css/main.css" />
+   <link rel="stylesheet" href="../../css/admin.css" />
+   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+</head>
+
+<body>
+
+   <!-- ===================== NAVBAR ===================== -->
+   <nav class="navbar scrolled" id="navbar">
+      <div class="nav-inner">
+         <a href="../../index.html" class="nav-logo">
+            <img src="../../assets/logo.svg" alt="SlotSync Logo" />
+            SlotSync
+         </a>
+         <ul class="nav-links" id="navLinks">
+            <li><a href="dashboard.html" class="active">Dashboard</a></li>
+            <li><a href="bookings.html">Bookings</a></li>
+            <li><a href="slots.html">Slots</a></li>
+            <li><a href="services.html">Services</a></li>
+         </ul>
+         <div class="nav-actions" id="navActions"></div>
+         <button class="nav-hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+         </button>
+      </div>
+   </nav>
+
+   <!-- ===================== PAGE HEADER ===================== -->
+   <section class="admin-page-header">
+      <div class="admin-header-inner">
+         <div class="admin-header-left">
+            <div class="section-tag">Admin</div>
+            <h1>Dashboard</h1>
+            <p>A live overview of bookings, revenue, and platform activity.</p>
+         </div>
+      </div>
+   </section>
+
+   <!-- ===================== STAT CARDS ===================== -->
+   <section class="admin-stats-section">
+      <div class="admin-stats-inner">
+
+         <div class="stat-card" id="statTotalBookings">
+            <div class="stat-card-icon">
+               <i class="hgi hgi-stroke hgi-calendar-03"></i>
+            </div>
+            <div class="stat-card-body">
+               <span class="stat-card-label">Total Bookings</span>
+               <span class="stat-card-value" id="valTotalBookings">—</span>
+            </div>
+         </div>
+
+         <div class="stat-card" id="statConfirmed">
+            <div class="stat-card-icon stat-card-icon--green">
+               <i class="hgi hgi-stroke hgi-checkmark-circle-02"></i>
+            </div>
+            <div class="stat-card-body">
+               <span class="stat-card-label">Confirmed</span>
+               <span class="stat-card-value" id="valConfirmed">—</span>
+            </div>
+         </div>
+
+         <div class="stat-card" id="statRevenue">
+            <div class="stat-card-icon stat-card-icon--purple">
+               <i class="hgi hgi-stroke hgi-money-bag-01"></i>
+            </div>
+            <div class="stat-card-body">
+               <span class="stat-card-label">Total Revenue</span>
+               <span class="stat-card-value" id="valRevenue">—</span>
+            </div>
+         </div>
+
+         <div class="stat-card" id="statMonthly">
+            <div class="stat-card-icon stat-card-icon--yellow">
+               <i class="hgi hgi-stroke hgi-chart-increase"></i>
+            </div>
+            <div class="stat-card-body">
+               <span class="stat-card-label">This Month</span>
+               <span class="stat-card-value" id="valMonthly">—</span>
+            </div>
+         </div>
+
+         <div class="stat-card" id="statCustomers">
+            <div class="stat-card-icon stat-card-icon--blue">
+               <i class="hgi hgi-stroke hgi-user-group"></i>
+            </div>
+            <div class="stat-card-body">
+               <span class="stat-card-label">Customers</span>
+               <span class="stat-card-value" id="valCustomers">—</span>
+            </div>
+         </div>
+
+         <div class="stat-card" id="statServices">
+            <div class="stat-card-icon stat-card-icon--red">
+               <i class="hgi hgi-stroke hgi-layers-01"></i>
+            </div>
+            <div class="stat-card-body">
+               <span class="stat-card-label">Active Services</span>
+               <span class="stat-card-value" id="valServices">—</span>
+            </div>
+         </div>
+
+      </div>
+   </section>
+
+   <!-- ===================== REVENUE CHART + PEAK HOURS ===================== -->
+   <section class="admin-charts-section">
+      <div class="admin-charts-inner">
+
+         <!-- Revenue chart -->
+         <div class="dashboard-card dashboard-card--wide">
+            <div class="dashboard-card-header">
+               <div class="admin-table-title">
+                  <span>📈</span>
+                  <h2>Revenue — Last 30 Days</h2>
+               </div>
+               <span class="admin-result-count" id="revenueChartMeta"></span>
+            </div>
+            <div class="chart-wrap" id="revenueChartWrap">
+               <div class="admin-loading" id="revenueChartLoading">
+                  <div class="loader-spinner"></div>
+                  <p>Loading chart…</p>
+               </div>
+               <canvas id="revenueChart" style="display:none;"></canvas>
+               <div class="admin-empty" id="revenueChartEmpty" style="display:none;">
+                  <div class="empty-icon">📉</div>
+                  <h3>No revenue data yet</h3>
+                  <p>Paid bookings will appear here.</p>
+               </div>
+            </div>
+         </div>
+
+         <!-- Peak hours -->
+         <div class="dashboard-card">
+            <div class="dashboard-card-header">
+               <div class="admin-table-title">
+                  <span>⏰</span>
+                  <h2>Peak Hours</h2>
+               </div>
+            </div>
+            <div id="peakHoursWrap">
+               <div class="admin-loading" id="peakHoursLoading">
+                  <div class="loader-spinner"></div>
+                  <p>Loading…</p>
+               </div>
+               <div class="admin-empty" id="peakHoursEmpty" style="display:none;">
+                  <div class="empty-icon">🕐</div>
+                  <h3>No data yet</h3>
+               </div>
+               <ul class="peak-list" id="peakList" style="display:none;"></ul>
+            </div>
+         </div>
+
+      </div>
+   </section>
+
+   <!-- ===================== RECENT BOOKINGS + POPULAR SERVICES ===================== -->
+   <section class="admin-table-section">
+      <div class="admin-table-inner">
+
+         <!-- Recent bookings -->
+         <div class="dashboard-card">
+            <div class="dashboard-card-header">
+               <div class="admin-table-title">
+                  <span>🗓️</span>
+                  <h2>Recent Bookings</h2>
+               </div>
+               <a href="bookings.html" class="btn-ghost" style="font-size:0.82rem;">View all →</a>
+            </div>
+
+            <div class="admin-loading" id="recentLoading">
+               <div class="loader-spinner"></div>
+               <p>Loading…</p>
+            </div>
+            <div class="admin-empty" id="recentEmpty" style="display:none;">
+               <div class="empty-icon">📭</div>
+               <h3>No bookings yet</h3>
+            </div>
+            <div class="admin-table-wrap" id="recentTableWrap" style="display:none;">
+               <table class="admin-table">
+                  <thead>
+                     <tr>
+                        <th>#</th>
+                        <th>Customer</th>
+                        <th>Service</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Payment</th>
+                     </tr>
+                  </thead>
+                  <tbody id="recentTableBody"></tbody>
+               </table>
+            </div>
+         </div>
+
+      </div>
+   </section>
+
+   <!-- Popular services — full width below -->
+   <section class="admin-table-section" style="padding-top:0;">
+      <div class="admin-table-inner">
+
+         <div class="dashboard-card">
+            <div class="dashboard-card-header">
+               <div class="admin-table-title">
+                  <span>🌟</span>
+                  <h2>Popular Services</h2>
+               </div>
+            </div>
+
+            <div class="admin-loading" id="popularLoading">
+               <div class="loader-spinner"></div>
+               <p>Loading…</p>
+            </div>
+            <div class="admin-empty" id="popularEmpty" style="display:none;">
+               <div class="empty-icon">🗂️</div>
+               <h3>No service data yet</h3>
+            </div>
+            <div class="admin-table-wrap" id="popularTableWrap" style="display:none;">
+               <table class="admin-table">
+                  <thead>
+                     <tr>
+                        <th>Service</th>
+                        <th>Price</th>
+                        <th>Total Bookings</th>
+                        <th>Revenue Generated</th>
+                        <th>Popularity</th>
+                     </tr>
+                  </thead>
+                  <tbody id="popularTableBody"></tbody>
+               </table>
+            </div>
+         </div>
+
+      </div>
+   </section>
+
+   <!-- ===================== FOOTER ===================== -->
+   <footer class="footer">
+      <div class="footer-inner">
+         <div class="footer-brand">
+            <a href="../../index.html" class="nav-logo">
+               <img src="../../assets/logo.svg" alt="SlotSync Logo" />
+               SlotSync
+            </a>
+            <p>Appointment booking for modern businesses.</p>
+         </div>
+         <div class="footer-links">
+            <div class="footer-col">
+               <h4>Admin</h4>
+               <a href="dashboard.html">Dashboard</a>
+               <a href="bookings.html">Bookings</a>
+               <a href="slots.html">Slots</a>
+               <a href="services.html">Services</a>
+            </div>
+            <div class="footer-col">
+               <h4>Account</h4>
+               <a href="../profile.html">Profile</a>
+            </div>
+         </div>
+      </div>
+      <div class="footer-bottom">
+         <p>© 2025 SlotSync. Built with Node.js + MySQL.</p>
+      </div>
+   </footer>
+
+   <script type="module" src="../../js/admin/dashboard.js"></script>
+</body>
+
+</html>

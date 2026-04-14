@@ -25,6 +25,15 @@ const createUser = async ({ name, email, phone, password }) => {
    return result.insertId;  // returns the new user's ID
 };
 
+const createAdmin = async ({ name, email, phone, password }) => {
+   const [result] = await db.query(
+      `INSERT INTO users (name, email, phone, password, role, is_verified)
+         VALUES (?, ?, ?, ?, 'admin', FALSE)`,
+      [name, email, phone, password]
+   );
+   return result.insertId;  // returns the new user's ID
+};
+
 const verifyUser = async (email) => {
    await db.query(
       'UPDATE users SET is_verified = TRUE WHERE email = ?',
@@ -46,11 +55,21 @@ const updateProfile = async (id, { name, phone }) => {
    );
 };
 
+const findByIdWithPassword = async (id) => {
+   const [rows] = await db.query(
+      'SELECT * FROM users WHERE id = ?',
+      [id]
+   );
+   return rows[0] || null;
+};
+
 export {
    findByEmail,
    findById,
    createUser,
+   createAdmin,
    verifyUser,
    updatePassword,
-   updateProfile
+   updateProfile,
+   findByIdWithPassword
 };

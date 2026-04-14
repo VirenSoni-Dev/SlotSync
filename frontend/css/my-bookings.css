@@ -1,0 +1,415 @@
+/* ============================================================
+   my-bookings.css — customer bookings dashboard
+   ============================================================ */
+
+/* ── Reuse page-header from services ── */
+.page-header {
+   padding-top: calc(var(--nav-height) + 48px);
+   padding-bottom: 48px;
+   background: var(--clr-bg-2);
+   border-bottom: 1px solid var(--clr-border);
+}
+
+.page-header-inner {
+   max-width: var(--max-w);
+   margin: 0 auto;
+   padding: 0 24px;
+}
+
+.page-header h1 {
+   font-size: clamp(2rem, 4vw, 3rem);
+   color: var(--clr-text);
+   margin-bottom: 10px;
+}
+
+.page-header p {
+   font-size: 1.05rem;
+   color: var(--clr-text-2);
+}
+
+/* ── Controls ── */
+.bookings-controls {
+   background: var(--clr-bg-2);
+   border-bottom: 1px solid var(--clr-border);
+   padding: 14px 0;
+   position: sticky;
+   top: var(--nav-height);
+   z-index: 10;
+}
+
+.controls-inner {
+   max-width: var(--max-w);
+   margin: 0 auto;
+   padding: 0 24px;
+}
+
+.filter-tabs {
+   display: flex;
+   gap: 8px;
+   flex-wrap: wrap;
+}
+
+.filter-tab {
+   background: transparent;
+   border: 1.5px solid var(--clr-border);
+   border-radius: 99px;
+   color: var(--clr-text-2);
+   font-family: var(--font-body);
+   font-size: 0.82rem;
+   font-weight: 500;
+   padding: 6px 16px;
+   cursor: pointer;
+   transition: all var(--transition);
+   white-space: nowrap;
+}
+
+.filter-tab:hover {
+   border-color: var(--clr-border-2);
+   color: var(--clr-text);
+}
+
+.filter-tab.active {
+   background: var(--clr-accent);
+   border-color: var(--clr-accent);
+   color: #fff;
+}
+
+/* ── Section ── */
+.bookings-section {
+   min-height: 60vh;
+   padding: 40px 0 80px;
+}
+
+.bookings-inner {
+   max-width: var(--max-w);
+   margin: 0 auto;
+   padding: 0 24px;
+}
+
+/* ── Loading ── */
+.bookings-loading {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   gap: 14px;
+   padding: 80px 0;
+   color: var(--clr-text-3);
+   font-size: 0.9rem;
+}
+
+.loading-spinner {
+   width: 36px;
+   height: 36px;
+   border: 3px solid var(--clr-border);
+   border-top-color: var(--clr-accent);
+   border-radius: 50%;
+   animation: spin 0.7s linear infinite;
+}
+
+/* ── Empty ── */
+.bookings-empty {
+   text-align: center;
+   padding: 80px 0;
+}
+
+.empty-icon {
+   font-size: 3rem;
+   margin-bottom: 16px;
+}
+
+.bookings-empty h3 {
+   font-size: 1.2rem;
+   color: var(--clr-text);
+   margin-bottom: 8px;
+}
+
+.bookings-empty p {
+   color: var(--clr-text-3);
+   font-size: 0.9rem;
+}
+
+/* ── Bookings list ── */
+.bookings-list {
+   display: flex;
+   flex-direction: column;
+   gap: 16px;
+}
+
+/* ── Booking card ── */
+.booking-card {
+   background: var(--clr-surface);
+   border: 1px solid var(--clr-border);
+   border-radius: var(--radius-lg);
+   padding: 24px;
+   display: flex;
+   align-items: flex-start;
+   gap: 20px;
+   transition: border-color var(--transition);
+   animation: fadeUp 0.4s var(--ease) both;
+}
+
+.booking-card:hover {
+   border-color: var(--clr-border-2);
+}
+
+/* Left date column */
+.booking-date-col {
+   background: var(--clr-bg-3);
+   border: 1px solid var(--clr-border);
+   border-radius: var(--radius);
+   padding: 12px 16px;
+   text-align: center;
+   min-width: 64px;
+   flex-shrink: 0;
+}
+
+.booking-day {
+   font-family: var(--font-display);
+   font-size: 1.6rem;
+   font-weight: 800;
+   color: var(--clr-text);
+   line-height: 1;
+}
+
+.booking-month {
+   font-size: 0.72rem;
+   font-weight: 600;
+   letter-spacing: 0.08em;
+   text-transform: uppercase;
+   color: var(--clr-text-3);
+   margin-top: 4px;
+}
+
+/* Main info */
+.booking-info {
+   flex: 1;
+   min-width: 0;
+}
+
+.booking-top {
+   display: flex;
+   align-items: flex-start;
+   justify-content: space-between;
+   gap: 12px;
+   margin-bottom: 10px;
+}
+
+.booking-service-name {
+   font-family: var(--font-display);
+   font-size: 1rem;
+   font-weight: 700;
+   color: var(--clr-text);
+}
+
+.booking-status-badge {
+   font-size: 0.72rem;
+   font-weight: 600;
+   padding: 4px 10px;
+   border-radius: 99px;
+   flex-shrink: 0;
+   white-space: nowrap;
+}
+
+.status-confirmed {
+   background: rgba(34, 211, 165, 0.12);
+   color: var(--clr-green);
+   border: 1px solid rgba(34, 211, 165, 0.25);
+}
+
+.status-pending {
+   background: rgba(251, 191, 36, 0.12);
+   color: var(--clr-yellow);
+   border: 1px solid rgba(251, 191, 36, 0.25);
+}
+
+.status-completed {
+   background: rgba(108, 99, 255, 0.12);
+   color: var(--clr-accent-2);
+   border: 1px solid rgba(108, 99, 255, 0.25);
+}
+
+.status-cancelled {
+   background: rgba(248, 113, 113, 0.12);
+   color: var(--clr-red);
+   border: 1px solid rgba(248, 113, 113, 0.25);
+}
+
+.status-failed {
+   background: rgba(248, 113, 113, 0.12);
+   color: var(--clr-red);
+   border: 1px solid rgba(248, 113, 113, 0.25);
+}
+
+.booking-meta {
+   display: flex;
+   flex-wrap: wrap;
+   gap: 14px;
+}
+
+.booking-meta-item {
+   display: flex;
+   align-items: center;
+   gap: 6px;
+   font-size: 0.82rem;
+   color: var(--clr-text-2);
+}
+
+.booking-meta-item i {
+   font-size: 0.85rem;
+   color: var(--clr-text-3);
+}
+
+/* Actions */
+.booking-actions {
+   display: flex;
+   flex-direction: column;
+   gap: 8px;
+   flex-shrink: 0;
+}
+
+.btn-cancel {
+   background: transparent;
+   border: 1.5px solid rgba(248, 113, 113, 0.3);
+   color: var(--clr-red);
+   font-family: var(--font-body);
+   font-size: 0.8rem;
+   font-weight: 500;
+   padding: 7px 14px;
+   border-radius: var(--radius);
+   cursor: pointer;
+   transition: all var(--transition);
+   white-space: nowrap;
+}
+
+.btn-cancel:hover {
+   background: rgba(248, 113, 113, 0.1);
+   border-color: var(--clr-red);
+}
+
+.btn-rebook {
+   background: transparent;
+   border: 1.5px solid var(--clr-border);
+   color: var(--clr-text-2);
+   font-family: var(--font-body);
+   font-size: 0.8rem;
+   font-weight: 500;
+   padding: 7px 14px;
+   border-radius: var(--radius);
+   cursor: pointer;
+   transition: all var(--transition);
+   text-align: center;
+   white-space: nowrap;
+   text-decoration: none;
+   display: inline-block;
+}
+
+.btn-rebook:hover {
+   border-color: var(--clr-accent);
+   color: var(--clr-accent-2);
+}
+
+/* ── Cancel modal ── */
+.modal-overlay {
+   position: fixed;
+   inset: 0;
+   background: rgba(10, 10, 15, 0.8);
+   backdrop-filter: blur(6px);
+   z-index: 200;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 24px;
+}
+
+.modal-card {
+   background: var(--clr-surface);
+   border: 1px solid var(--clr-border);
+   border-radius: var(--radius-lg);
+   padding: 32px;
+   max-width: 400px;
+   width: 100%;
+   text-align: center;
+   animation: fadeUp 0.3s var(--ease);
+}
+
+.modal-icon {
+   font-size: 2.5rem;
+   margin-bottom: 16px;
+}
+
+.modal-card h3 {
+   font-size: 1.2rem;
+   color: var(--clr-text);
+   margin-bottom: 10px;
+}
+
+.modal-card p {
+   font-size: 0.9rem;
+   color: var(--clr-text-2);
+   line-height: 1.6;
+   margin-bottom: 24px;
+}
+
+.modal-actions {
+   display: flex;
+   gap: 12px;
+   justify-content: center;
+}
+
+.modal-actions .btn-outline {
+   padding: 10px 20px;
+   flex: 1;
+}
+
+.btn-danger {
+   flex: 1;
+   display: inline-flex;
+   align-items: center;
+   justify-content: center;
+   gap: 8px;
+   background: var(--clr-red);
+   color: #fff;
+   font-family: var(--font-display);
+   font-weight: 600;
+   font-size: 0.9rem;
+   padding: 10px 20px;
+   border-radius: 8px;
+   border: none;
+   cursor: pointer;
+   transition: background var(--transition);
+}
+
+.btn-danger:hover {
+   background: #f05252;
+}
+
+.btn-spinner {
+   width: 14px;
+   height: 14px;
+   border: 2px solid rgba(255, 255, 255, 0.3);
+   border-top-color: #fff;
+   border-radius: 50%;
+   animation: spin 0.7s linear infinite;
+}
+
+/* ── Active nav ── */
+.nav-links a.active {
+   color: var(--clr-accent-2);
+}
+
+/* ── Responsive ── */
+@media (max-width: 600px) {
+   .booking-card {
+      flex-direction: column;
+   }
+
+   .booking-actions {
+      flex-direction: row;
+   }
+
+   .booking-date-col {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+   }
+}

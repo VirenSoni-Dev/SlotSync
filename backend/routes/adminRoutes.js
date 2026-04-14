@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import * as adminController from '../controllers/adminController.js';
+import * as businessController from '../controllers/businessController.js';
 import authMiddleware from '../middleware/authMiddleware.js';
 import { isAdmin } from '../middleware/roleMiddleware.js';
 
@@ -10,6 +11,7 @@ const router = Router();
 router.use(authMiddleware);
 router.use(isAdmin);
 
+// ── Analytics ──
 // GET /api/admin/analytics
 router.get('/analytics', adminController.getAnalytics);
 
@@ -24,5 +26,12 @@ router.get('/recent-bookings', adminController.getRecentBookings);
 
 // GET /api/admin/revenue-by-day
 router.get('/revenue-by-day', adminController.getRevenueByDay);
+
+// ── Business profile ──
+// GET /api/admin/business
+router.get('/business', businessController.getProfile);
+
+// PUT /api/admin/business
+router.put('/business', businessController.updateProfile);
 
 export default router;

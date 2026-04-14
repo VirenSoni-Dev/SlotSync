@@ -28,6 +28,12 @@ router.post('/register',
    authController.register
 );
 
+router.post('/registerAdmin',
+   authLimiter,
+   validate(registerSchema),
+   authController.registerAdmin
+);
+
 // POST /api/auth/login
 router.post('/login',
    authLimiter,
@@ -74,6 +80,18 @@ router.post('/refresh-token',
 router.post('/logout',
    authMiddleware,
    authController.logout
+);
+
+// PUT /api/auth/profile
+router.put('/profile',
+   authMiddleware,
+   authController.updateProfile
+);
+
+// PUT /api/auth/change-password
+router.put('/change-password',
+   authMiddleware,
+   authController.changePassword
 );
 
 export default router;

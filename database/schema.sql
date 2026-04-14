@@ -154,3 +154,32 @@ CREATE TABLE IF NOT EXISTS waitlist (
 -- You should see 7 tables:
 --   bookings, otps, payments, services, slots, users, waitlist
 -- ============================================================
+-- ============================================================
+-- 8. BUSINESS_PROFILE
+--    One row only — stores the identity of the business that
+--    owns and operates this platform instance.
+--    Kept separate from users so business info can be updated
+--    independently from the admin account credentials.
+--    When converting to multi-business: this table gains a
+--    user_id FK and services/slots gain a business_id FK.
+-- ============================================================
+CREATE TABLE IF NOT EXISTS business_profile (
+    id           INT AUTO_INCREMENT PRIMARY KEY,
+    name         VARCHAR(150)  NOT NULL,
+    tagline      VARCHAR(255),
+    email        VARCHAR(100),
+    phone        VARCHAR(15),
+    address      TEXT,
+    category     VARCHAR(100),
+    website      VARCHAR(255),
+    updated_at   TIMESTAMP     DEFAULT CURRENT_TIMESTAMP
+                               ON UPDATE CURRENT_TIMESTAMP
+);
+ 
+-- ============================================================
+-- Replace the previous closing comment:
+-- DONE. Verify by running: SHOW TABLES;
+-- You should see 8 tables:
+--   bookings, business_profile, otps, payments,
+--   services, slots, users, waitlist
+-- ============================================================

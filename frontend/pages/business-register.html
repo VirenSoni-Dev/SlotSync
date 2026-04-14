@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>Business Registration — SlotSync</title>
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap"
+      rel="stylesheet" />
+   <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
+   <link rel="stylesheet" href="../css/main.css" />
+   <link rel="stylesheet" href="../css/auth.css" />
+</head>
+
+<body class="auth-page">
+
+   <!-- Minimal navbar -->
+   <nav class="auth-nav">
+      <a href="../index.html" class="nav-logo">
+         <img src="../assets/logo.svg" alt="SlotSync Logo" />
+         SlotSync
+      </a>
+      <span class="auth-nav-hint">
+         Already registered?
+         <a href="login.html">Log in</a>
+      </span>
+   </nav>
+
+   <main class="auth-main">
+
+      <!-- Left panel — decorative -->
+      <div class="auth-panel">
+         <div class="panel-content">
+            <div class="panel-tag">For Businesses</div>
+            <h2>Start accepting<br />bookings today.</h2>
+            <p>Set up your business on SlotSync in minutes. Manage slots, track revenue, and let customers book
+               themselves.</p>
+            <div class="panel-features">
+               <div class="panel-feature">
+                  <i class="hgi hgi-stroke hgi-checkmark-circle-01"></i>
+                  <span>Full admin dashboard</span>
+               </div>
+               <div class="panel-feature">
+                  <i class="hgi hgi-stroke hgi-checkmark-circle-01"></i>
+                  <span>Automated email reminders</span>
+               </div>
+               <div class="panel-feature">
+                  <i class="hgi hgi-stroke hgi-checkmark-circle-01"></i>
+                  <span>Razorpay payment integration</span>
+               </div>
+               <div class="panel-feature">
+                  <i class="hgi hgi-stroke hgi-checkmark-circle-01"></i>
+                  <span>Revenue & booking analytics</span>
+               </div>
+            </div>
+         </div>
+         <div class="panel-bg">
+            <div class="panel-circle c1"></div>
+            <div class="panel-circle c2"></div>
+         </div>
+      </div>
+
+      <!-- Right panel — form -->
+      <div class="auth-form-wrap">
+         <div class="auth-card">
+            <div class="auth-card-header">
+               <h1>Register your business</h1>
+               <p>Create your admin account to get started</p>
+            </div>
+
+            <div class="auth-error" id="authError" style="display:none;"></div>
+
+            <div class="auth-fields">
+
+               <!-- Business Name -->
+               <div class="field-group">
+                  <label for="businessName">Business Name</label>
+                  <div class="field-input-wrap">
+                     <i class="hgi hgi-stroke hgi-building-04"></i>
+                     <input type="text" id="businessName" name="businessName" placeholder="e.g. Sharma's Salon"
+                        autocomplete="organization" />
+                  </div>
+                  <span class="field-error" id="businessNameError"></span>
+               </div>
+
+               <!-- Owner Name -->
+               <div class="field-group">
+                  <label for="name">Owner's Full Name</label>
+                  <div class="field-input-wrap">
+                     <i class="hgi hgi-stroke hgi-user"></i>
+                     <input type="text" id="name" name="name" placeholder="Rahul Sharma" autocomplete="name" />
+                  </div>
+                  <span class="field-error" id="nameError"></span>
+               </div>
+
+               <!-- Email -->
+               <div class="field-group">
+                  <label for="email">Business Email</label>
+                  <div class="field-input-wrap">
+                     <i class="hgi hgi-stroke hgi-mail-01"></i>
+                     <input type="email" id="email" name="email" placeholder="hello@yourbusiness.com"
+                        autocomplete="email" />
+                  </div>
+                  <span class="field-error" id="emailError"></span>
+               </div>
+
+               <!-- Phone -->
+               <div class="field-group">
+                  <label for="phone">Phone Number</label>
+                  <div class="field-input-wrap">
+                     <i class="hgi hgi-stroke hgi-call-02"></i>
+                     <input type="tel" id="phone" name="phone" placeholder="9876543210" maxlength="10"
+                        autocomplete="tel" />
+                  </div>
+                  <span class="field-error" id="phoneError"></span>
+               </div>
+
+               <!-- Password -->
+               <div class="field-group">
+                  <label for="password">Password</label>
+                  <div class="field-input-wrap">
+                     <i class="hgi hgi-stroke hgi-lock-password"></i>
+                     <input type="password" id="password" name="password" placeholder="Minimum 8 characters"
+                        autocomplete="new-password" />
+                     <button type="button" class="field-toggle" id="togglePassword" aria-label="Toggle password">
+                        <i class="hgi hgi-stroke hgi-view-01" id="toggleIcon"></i>
+                     </button>
+                  </div>
+                  <span class="field-error" id="passwordError"></span>
+                  <div class="strength-bar" id="strengthBar">
+                     <div class="strength-fill" id="strengthFill"></div>
+                  </div>
+                  <span class="strength-label" id="strengthLabel"></span>
+               </div>
+
+            </div>
+
+            <button class="btn-primary btn-full" id="registerBtn">
+               <span id="registerBtnText">Create Business Account</span>
+               <span id="registerBtnLoader" class="btn-spinner" style="display:none;"></span>
+            </button>
+
+            <p class="auth-terms">
+               By signing up you agree to our
+               <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+            </p>
+
+         </div>
+      </div>
+
+   </main>
+
+   <script type="module" src="../js/business-register.js"></script>
+</body>
+
+</html>

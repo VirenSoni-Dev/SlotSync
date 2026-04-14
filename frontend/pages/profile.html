@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8" />
+   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+   <title>My Profile — SlotSync</title>
+
+   <!-- Fonts -->
+   <link rel="preconnect" href="https://fonts.googleapis.com" />
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+   <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap"
+      rel="stylesheet" />
+
+   <!-- Hugeicons -->
+   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hugeicons/hugeicons@0.0.1/css/hgi-stroke-rounded.css" />
+
+   <!-- Styles -->
+   <link rel="stylesheet" href="../css/main.css" />
+   <link rel="stylesheet" href="../css/profile.css" />
+</head>
+
+<body>
+
+   <!-- ── Navbar ── -->
+   <nav class="navbar">
+      <div class="nav-inner">
+         <a href="../../index.html" class="nav-logo">
+            <img src="../assets/logo.svg" alt="SlotSync" />
+            <span>SlotSync</span>
+         </a>
+         <div class="nav-links" id="navLinks">
+            <a href="services.html">Services</a>
+            <a href="my-bookings.html">My Bookings</a>
+            <a href="profile.html" class="active">Profile</a>
+         </div>
+         <div class="nav-actions">
+            <button class="btn btn-ghost" id="logoutBtn">Logout</button>
+         </div>
+      </div>
+   </nav>
+
+   <!-- ── Main ── -->
+   <main class="profile-main">
+
+      <!-- Page header -->
+      <div class="profile-header">
+         <div class="profile-avatar" id="profileAvatar">
+            <span id="avatarInitials">?</span>
+         </div>
+         <div class="profile-header-info">
+            <h1 class="profile-name" id="profileName">Loading…</h1>
+            <p class="profile-role" id="profileRole">—</p>
+            <p class="profile-since">Member since <span id="profileSince">—</span></p>
+         </div>
+      </div>
+
+      <!-- Cards grid -->
+      <div class="profile-grid">
+
+         <!-- ── Card 1: Personal Info ── -->
+         <section class="profile-card" id="infoCard">
+            <div class="card-header">
+               <div class="card-title">
+                  <span class="card-icon">👤</span>
+                  <h2>Personal Info</h2>
+               </div>
+               <button class="btn-edit" id="editInfoBtn" aria-label="Edit profile">
+                  <i class="hgi hgi-stroke hgi-pencil-01"></i>
+                  <span>Edit</span>
+               </button>
+            </div>
+
+            <!-- View mode -->
+            <div class="info-view" id="infoView">
+               <div class="info-row">
+                  <span class="info-label">
+                     <i class="hgi hgi-stroke hgi-user-01"></i>
+                     Full Name
+                  </span>
+                  <span class="info-value" id="viewName">—</span>
+               </div>
+               <div class="info-row">
+                  <span class="info-label">
+                     <i class="hgi hgi-stroke hgi-mail-01"></i>
+                     Email
+                  </span>
+                  <span class="info-value" id="viewEmail">—</span>
+               </div>
+               <div class="info-row">
+                  <span class="info-label">
+                     <i class="hgi hgi-stroke hgi-phone-01"></i>
+                     Phone
+                  </span>
+                  <span class="info-value" id="viewPhone">—</span>
+               </div>
+            </div>
+
+            <!-- Edit mode -->
+            <form class="info-form hidden" id="infoForm" novalidate>
+               <div class="form-group">
+                  <label for="editName">Full Name</label>
+                  <div class="input-wrap">
+                     <i class="hgi hgi-stroke hgi-user-01"></i>
+                     <input type="text" id="editName" name="name" placeholder="Your full name" autocomplete="name" />
+                  </div>
+                  <span class="field-error" id="nameError"></span>
+               </div>
+               <div class="form-group">
+                  <label for="editPhone">Phone Number</label>
+                  <div class="input-wrap">
+                     <i class="hgi hgi-stroke hgi-phone-01"></i>
+                     <input type="tel" id="editPhone" name="phone" placeholder="10-digit mobile number"
+                        autocomplete="tel" />
+                  </div>
+                  <span class="field-error" id="phoneError"></span>
+               </div>
+               <div class="form-actions">
+                  <button type="button" class="btn btn-ghost btn-sm" id="cancelInfoBtn">Cancel</button>
+                  <button type="submit" class="btn btn-primary btn-sm" id="saveInfoBtn">
+                     <span class="btn-text">Save Changes</span>
+                     <span class="btn-loader hidden">
+                        <i class="hgi hgi-stroke hgi-refresh"></i>
+                     </span>
+                  </button>
+               </div>
+               <div class="form-message hidden" id="infoMessage"></div>
+            </form>
+         </section>
+
+         <!-- ── Card 2: Account Details ── -->
+         <section class="profile-card" id="accountCard">
+            <div class="card-header">
+               <div class="card-title">
+                  <span class="card-icon">🛡️</span>
+                  <h2>Account Details</h2>
+               </div>
+            </div>
+            <div class="info-view">
+               <div class="info-row">
+                  <span class="info-label">
+                     <i class="hgi hgi-stroke hgi-shield-user"></i>
+                     Role
+                  </span>
+                  <span class="info-value">
+                     <span class="role-badge" id="roleBadge">—</span>
+                  </span>
+               </div>
+               <div class="info-row">
+                  <span class="info-label">
+                     <i class="hgi hgi-stroke hgi-checkmark-circle-01"></i>
+                     Status
+                  </span>
+                  <span class="info-value">
+                     <span class="status-badge status-verified">✅ Verified</span>
+                  </span>
+               </div>
+               <div class="info-row">
+                  <span class="info-label">
+                     <i class="hgi hgi-stroke hgi-calendar-02"></i>
+                     Member Since
+                  </span>
+                  <span class="info-value" id="accountSince">—</span>
+               </div>
+            </div>
+
+            <!-- Quick links -->
+            <div class="quick-links">
+               <a href="my-bookings.html" class="quick-link">
+                  <i class="hgi hgi-stroke hgi-calendar-check-in"></i>
+                  <span>My Bookings</span>
+                  <i class="hgi hgi-stroke hgi-arrow-right-01 arrow"></i>
+               </a>
+               <a href="services.html" class="quick-link">
+                  <i class="hgi hgi-stroke hgi-briefcase-01"></i>
+                  <span>Browse Services</span>
+                  <i class="hgi hgi-stroke hgi-arrow-right-01 arrow"></i>
+               </a>
+            </div>
+         </section>
+
+         <!-- ── Card 3: Change Password ── -->
+         <section class="profile-card card-full" id="passwordCard">
+            <div class="card-header">
+               <div class="card-title">
+                  <span class="card-icon">🔐</span>
+                  <h2>Change Password</h2>
+               </div>
+            </div>
+
+            <form class="password-form" id="passwordForm" novalidate>
+               <div class="password-fields">
+                  <div class="form-group">
+                     <label for="currentPassword">Current Password</label>
+                     <div class="input-wrap">
+                        <i class="hgi hgi-stroke hgi-lock-password"></i>
+                        <input type="password" id="currentPassword" name="currentPassword"
+                           placeholder="Enter current password" autocomplete="current-password" />
+                        <button type="button" class="toggle-pw" data-target="currentPassword"
+                           aria-label="Toggle password visibility">
+                           <i class="hgi hgi-stroke hgi-view-01" id="toggleCurrentIcon"></i>
+                        </button>
+                     </div>
+                     <span class="field-error" id="currentPwError"></span>
+                  </div>
+
+                  <div class="form-group">
+                     <label for="newPassword">New Password</label>
+                     <div class="input-wrap">
+                        <i class="hgi hgi-stroke hgi-lock-password"></i>
+                        <input type="password" id="newPassword" name="newPassword" placeholder="Min 8 characters"
+                           autocomplete="new-password" />
+                        <button type="button" class="toggle-pw" data-target="newPassword"
+                           aria-label="Toggle password visibility">
+                           <i class="hgi hgi-stroke hgi-view-01" id="toggleNewIcon"></i>
+                        </button>
+                     </div>
+                     <span class="field-error" id="newPwError"></span>
+                  </div>
+
+                  <div class="form-group">
+                     <label for="confirmPassword">Confirm New Password</label>
+                     <div class="input-wrap">
+                        <i class="hgi hgi-stroke hgi-lock-password"></i>
+                        <input type="password" id="confirmPassword" name="confirmPassword"
+                           placeholder="Re-enter new password" autocomplete="new-password" />
+                        <button type="button" class="toggle-pw" data-target="confirmPassword"
+                           aria-label="Toggle password visibility">
+                           <i class="hgi hgi-stroke hgi-view-01" id="toggleConfirmIcon"></i>
+                        </button>
+                     </div>
+                     <span class="field-error" id="confirmPwError"></span>
+                  </div>
+               </div>
+
+               <div class="form-actions">
+                  <button type="submit" class="btn btn-primary btn-sm" id="changePwBtn">
+                     <span class="btn-text">Update Password</span>
+                     <span class="btn-loader hidden">
+                        <i class="hgi hgi-stroke hgi-refresh"></i>
+                     </span>
+                  </button>
+               </div>
+               <div class="form-message hidden" id="passwordMessage"></div>
+            </form>
+         </section>
+
+      </div>
+   </main>
+
+   <script type="module" src="../js/profile.js"></script>
+</body>
+
+</html>
