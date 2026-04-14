@@ -11,7 +11,7 @@
 //    - throw errors for non-OK responses
 // ============================================================
 
-const BASE_URL = 'http://localhost:5000/api';
+const BASE_URL = 'https://slotsync-8c3e.onrender.com/api';
 
 // ── Build headers for every request ──
 function getHeaders(includeAuth = true) {
