@@ -1,7 +1,7 @@
 # SlotSync
 An Appointment Booking and SLot Mangagement Platform
 
-🌐 Live Demo: https://slotsync.vercel.app/
+🌐 Live Demo: https://slotsync-booking.vercel.app/
 
 ## Tech Stack
 * Frontend - `HTML/CSS`, `JavaScript`
