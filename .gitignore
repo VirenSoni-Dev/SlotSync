@@ -3,3 +3,4 @@ tryingGemini/
 **/node_modules/
 
 **/*.env
+frontend-react/
